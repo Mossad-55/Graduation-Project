@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository;
 
@@ -17,4 +18,5 @@ public class RepositoryContext : DbContext
     }
 
     // DbSets Here.
+    public DbSet<University>? Universities { get; set; }
 }
