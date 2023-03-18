@@ -14,6 +14,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerServices();
 builder.Services.ConfigureSqlContext(builder.Configuration);
+builder.Services.ConfigureIdentityUser();
 
 // Configure AutoMapper Profile.
 builder.Services.AddAutoMapper(typeof(Program));
