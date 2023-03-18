@@ -1,10 +1,11 @@
 ﻿using Entities.Models;
+using Shared.DataTranferObjects;
 
 namespace Service.Contracts;
 
 public interface IUniversityService
 {
-    IEnumerable<University> GetAllUniversities(bool trackChanges);
-    University GetUniversity(Guid id, bool trackChanges);
-
+    IEnumerable<UniversityDto> GetAllUniversities(bool trackChanges);
+    UniversityDto GetUniversity(Guid id, bool trackChanges);
+    UniversityDto CreateUniversity(UniversityForCreationDto university);
 }
