@@ -1,22 +1,20 @@
-﻿using Entities.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Repository;
 
-public class RepositoryContext : IdentityDbContext<ApplicationUser>
+public class RepositoryContext : DbContext
 {
-	public RepositoryContext(DbContextOptions<RepositoryContext> options)
+	public RepositoryContext(DbContextOptions options)
 		: base(options)
 	{
 
 	}
 
-    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // modelBuilder.ApplyConfiguration(new CompanyConfiguration());
         // modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-    }*/
+    }
 
     // DbSets Here.
 }
