@@ -15,7 +15,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerServices();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
-
+builder.Services.ConfigureServiceManager();
 
 // Configure AutoMapper Profile.
 builder.Services.AddAutoMapper(typeof(Program));
