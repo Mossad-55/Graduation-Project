@@ -17,5 +17,12 @@ public class UniversityController : ControllerBase
         var universities = _service.UniversityService.GetAllUniversities(trackChanges: false);
         return Ok(universities);
     }
-    
+
+    [HttpDelete("{id:guid}")]
+    public IActionResult DeleteUniversity(Guid id)
+    {
+        _service.UniversityService.DeleteUniversity(id, trackChanges: false);
+
+        return NoContent();
+    }
 }

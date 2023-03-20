@@ -20,7 +20,7 @@ internal sealed class UniversityService : IUniversityService
         _mapper = mapper;
     }
 
-    public void DeleteCompany(Guid universityId, bool trackChanges)
+    public void DeleteUniversity(Guid universityId, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, trackChanges);
         if (university is null)
