@@ -50,4 +50,14 @@ internal sealed class UniversityService : IUniversityService
 
         return universityDto;
     }
+
+    public void UpdateUniversity(Guid universityId, UniversityForUpdateDto universityForUpdate, bool trackChanges)
+    {
+        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
+        _mapper.Map(universityForUpdate, university);
+        _repository.Save();
+    }
 }
