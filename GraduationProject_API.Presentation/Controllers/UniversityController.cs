@@ -19,6 +19,14 @@ public class UniversityController : ControllerBase
         return Ok(universities);
     }
 
+    [HttpGet("{id:guid}")]
+    public IActionResult GetUniversity(Guid id)
+    {
+        var university = _service.UniversityService.GetUniversity(id, trackChanges: false);
+
+        return Ok(university);
+    }
+
     [HttpPut("{id:guid}")]
     public IActionResult UpdateUniversity(Guid id, [FromBody]UniversityForUpdateDto university)
     {
