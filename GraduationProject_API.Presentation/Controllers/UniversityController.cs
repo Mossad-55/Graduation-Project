@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTranferObjects;
 
 namespace GraduationProject_API.Presentation.Controllers;
 
@@ -22,6 +23,17 @@ public class UniversityController : ControllerBase
     public IActionResult DeleteUniversity(Guid id)
     {
         _service.UniversityService.DeleteUniversity(id, trackChanges: false);
+
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}")]
+    public IActionResult UpdateUniversity(Guid id, [FromBody]UniversityForUpdateDto university)
+    {
+        if (university is null)
+            return BadRequest("University Object is null!");
+
+        _service.UniversityService.UpdateUniversity(id, university, trackChanges: true);
 
         return NoContent();
     }
