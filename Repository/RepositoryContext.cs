@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Configuration;
 
 namespace Repository;
 
@@ -13,8 +14,9 @@ public class RepositoryContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.ApplyConfiguration(new CompanyConfiguration());
-        // modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        // Applying Configuration For Each Entity.
+        modelBuilder.ApplyConfiguration(new UniversityConfiguration());
+
     }
 
     // DbSets Here.
