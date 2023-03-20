@@ -6,5 +6,4 @@ public interface IUniversityRepository
 {
     IEnumerable<University> GetAllUniversities(bool trackChanges);
     University GetUniversity(Guid id, bool trackChanges);
-    void DeleteUniversity(University university);
 }

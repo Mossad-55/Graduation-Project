@@ -20,16 +20,6 @@ internal sealed class UniversityService : IUniversityService
         _mapper = mapper;
     }
 
-    public void DeleteUniversity(Guid universityId, bool trackChanges)
-    {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        _repository.University.DeleteUniversity(university);
-        _repository.Save();
-    }
-
     public IEnumerable<UniversityDto> GetAllUniversities(bool trackChanges)
     {
         var universities = _repository.University.GetAllUniversities(trackChanges);

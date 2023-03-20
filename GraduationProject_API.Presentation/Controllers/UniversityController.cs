@@ -19,14 +19,6 @@ public class UniversityController : ControllerBase
         return Ok(universities);
     }
 
-    [HttpDelete("{id:guid}")]
-    public IActionResult DeleteUniversity(Guid id)
-    {
-        _service.UniversityService.DeleteUniversity(id, trackChanges: false);
-
-        return NoContent();
-    }
-
     [HttpPut("{id:guid}")]
     public IActionResult UpdateUniversity(Guid id, [FromBody]UniversityForUpdateDto university)
     {
