@@ -19,7 +19,6 @@ internal sealed class UniversityRepository : RepositoryBase<University>, IUniver
         FindByCondition(u => u.Id == id, trackChanges)
         .SingleOrDefault();
 
-    public void CreateUniversity(University university) => Create(university);
-
     public void DeleteUniversity(University university) => Delete(university);
+
 }

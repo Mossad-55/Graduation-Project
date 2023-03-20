@@ -20,11 +20,6 @@ internal sealed class UniversityService : IUniversityService
         _mapper = mapper;
     }
 
-    public UniversityDto CreateUniversity(UniversityForCreationDto university)
-    {
-        throw new NotImplementedException();
-    }
-
     public IEnumerable<UniversityDto> GetAllUniversities(bool trackChanges)
     {
         var universities = _repository.University.GetAllUniversities(trackChanges);

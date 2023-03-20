@@ -12,6 +12,6 @@ public class MappingProfile : Profile
 
         // University Mapping
         CreateMap<University, UniversityDto>();
-        CreateMap<UniversityForCreationDto, University>();
+        CreateMap<UniversityForUpdateDto, University>();
     }
 }

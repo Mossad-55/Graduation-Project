@@ -15,4 +15,5 @@ public class University
     [Required(ErrorMessage = "University description is a required field.")]
     public string? Description { get; set; }
 
+    public double Rate { get; set; }
 }
