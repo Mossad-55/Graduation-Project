@@ -13,5 +13,10 @@ public class MappingProfile : Profile
         // University Mapping
         CreateMap<University, UniversityDto>();
         CreateMap<UniversityForUpdateDto, University>();
+
+        // Faculty Mapping
+        CreateMap<Faculty, FacultyDto>();
+        CreateMap<FacultyForCreationDto, Faculty>();
+        CreateMap<FacultyForUpdateDto, Faculty>();
     }
 }
