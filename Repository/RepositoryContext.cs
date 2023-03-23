@@ -16,9 +16,11 @@ public class RepositoryContext : DbContext
     {
         // Applying Configuration For Each Entity.
         modelBuilder.ApplyConfiguration(new UniversityConfiguration());
+        modelBuilder.ApplyConfiguration(new FacultyConfiguration());
 
     }
 
     // DbSets Here.
     public DbSet<University>? Universities { get; set; }
+    public DbSet<Faculty>? Faculties { get; set; }
 }

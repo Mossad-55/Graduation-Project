@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230323191913_AddedFacultyTbWithInitialData")]
+    partial class AddedFacultyTbWithInitialData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +40,6 @@ namespace GraduationProject_API.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
-
                     b.Property<Guid>("UniversityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -56,7 +55,6 @@ namespace GraduationProject_API.Migrations
                             Id = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
                             Description = "We believe that software and information technology is the future, hence we have recruited our knowledge in the fields of information system and automation.",
                             Name = "Faculty Of Computer Science and Information Technology",
-                            Rate = 0.0,
                             UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
                         },
                         new
@@ -64,7 +62,6 @@ namespace GraduationProject_API.Migrations
                             Id = new Guid("2694c80b-f092-4975-9688-5565cf1e67fc"),
                             Description = "The Faculty of Science at Damanhour University is a renowned academic institution located in the city of Damanhour, Egypt. The faculty is dedicated to providing students with a comprehensive education in the field of science, preparing them for successful careers in research, academia, and industry.",
                             Name = "Faculty Of Science",
-                            Rate = 0.0,
                             UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
                         },
                         new
@@ -72,7 +69,6 @@ namespace GraduationProject_API.Migrations
                             Id = new Guid("0f3b208b-2006-4c07-878f-27e4dd1cc99e"),
                             Description = "The Faculty of Engineering at Damanhour University is a prestigious academic institution located in the city of Damanhour, Egypt. The faculty is dedicated to providing students with a comprehensive education in the field of engineering, preparing them for successful careers in research, academia, and industry.",
                             Name = "Faculty Of Engineering",
-                            Rate = 0.0,
                             UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
                         },
                         new
@@ -80,7 +76,6 @@ namespace GraduationProject_API.Migrations
                             Id = new Guid("fafbc1d0-d161-4f1e-9ef6-f7cfd23d97f5"),
                             Description = "The Faculty of Commerce at Damanhour University is a leading academic institution located in the city of Damanhour, Egypt. The faculty is committed to providing high-quality education and training to students in the field of commerce and business.",
                             Name = "Faculty Of Commerce",
-                            Rate = 0.0,
                             UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
                         });
                 });

@@ -13,8 +13,8 @@ public class Faculty
     public string? Name { get; set; }
 
     [Required(ErrorMessage = "Description is a required field.")]
-    [MaxLength(20, ErrorMessage = "Maximum length for the Description is 20 characters.")]
     public string? Description { get; set; }
+    public double Rate { get; set; }
 
     [ForeignKey(nameof(University))]
     public Guid UniversityId { get; set; }
