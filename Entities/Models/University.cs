@@ -17,4 +17,5 @@ public class University
 
     public double Rate { get; set; }
     
+    public ICollection<Faculty>? Faculties { get; set; }
 }
