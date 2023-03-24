@@ -23,4 +23,6 @@ public class RepositoryContext : DbContext
     // DbSets Here.
     public DbSet<University>? Universities { get; set; }
     public DbSet<Faculty>? Faculties { get; set; }
+    public DbSet<Department>? Departments { get; set; }
+
 }
