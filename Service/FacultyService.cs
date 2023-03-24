@@ -55,6 +55,7 @@ internal sealed class FacultyService : IFacultyService
         var facultyEntity = _mapper.Map<Faculty>(faculty);
 
         _repository.Faculty.CreateFacultyForUniversity(universityId, facultyEntity);
+        _repository.Save();
 
         var facultyToReture = _mapper.Map<FacultyDto>(facultyEntity);
         return facultyToReture;
