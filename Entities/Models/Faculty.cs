@@ -19,4 +19,5 @@ public class Faculty
     [ForeignKey(nameof(University))]
     public Guid UniversityId { get; set; }
     public University? University { get; set; }
+    public ICollection<Department>? Departments { get; set; }
 }
