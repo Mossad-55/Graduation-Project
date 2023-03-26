@@ -22,12 +22,16 @@ internal sealed class DepartmentService : IDepartmentService
 
     public DepartmentDto CreateDepartmentForFaculty(Guid universityId, Guid facultyId, DepartmentForCreateDto department, bool trackChanges)
     {
+        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
         var departmentEntity = _mapper.Map<Department>(department);
-
+        
         _repository.Department.CreateDepartmentForFaculty(facultyId, departmentEntity);
         _repository.Save();
 
@@ -37,6 +41,10 @@ internal sealed class DepartmentService : IDepartmentService
 
     public void DeleteDepartmentForFaculty(Guid universityId, Guid facultyId, Guid id, bool trackChanges)
     {
+        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
@@ -51,6 +59,10 @@ internal sealed class DepartmentService : IDepartmentService
 
     public IEnumerable<DepartmentDto> GetAllDepartments(Guid universityId, Guid facultyId, bool trackChanges)
     {
+        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
@@ -64,6 +76,10 @@ internal sealed class DepartmentService : IDepartmentService
 
     public DepartmentDto GetDepartment(Guid universityId, Guid facultyId, Guid id, bool trackChanges)
     {
+        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
@@ -79,6 +95,10 @@ internal sealed class DepartmentService : IDepartmentService
 
     public void UpdateDepartmentForFaculty(Guid universityId, Guid facultyId, Guid id, DepartmentForUpdateDto department, bool facTrackChanges, bool depTrackChanges)
     {
+        var university = _repository.University.GetUniversity(universityId, false);
+        if (university is null)
+            throw new UniversityNotFoundException(universityId);
+
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, facTrackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);

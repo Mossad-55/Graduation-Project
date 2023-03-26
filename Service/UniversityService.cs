@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 using System.Diagnostics;
@@ -32,7 +33,6 @@ internal sealed class UniversityService : IUniversityService
     public UniversityDto GetUniversity(Guid id, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(id, trackChanges);
-
         if (university is null)
             throw new UniversityNotFoundException(id);
 
@@ -43,9 +43,9 @@ internal sealed class UniversityService : IUniversityService
 
     public void UpdateUniversity(Guid universityId, UniversityForUpdateDto universityForUpdate, bool trackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
+        var university = _repository.University.GetUniversity(id, trackChanges);
         if (university is null)
-            throw new UniversityNotFoundException(universityId);
+            throw new UniversityNotFoundException(id);
 
         _mapper.Map(universityForUpdate, university);
         _repository.Save();
