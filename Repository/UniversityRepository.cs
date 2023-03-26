@@ -17,6 +17,6 @@ internal sealed class UniversityRepository : RepositoryBase<University>, IUniver
 
     public University GetUniversity(Guid id, bool trackChanges) =>
         FindByCondition(u => u.Id == id, trackChanges)
-        .SingleOrDefault();
+        .FirstOrDefault();
 
 }
