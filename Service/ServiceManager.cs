@@ -9,6 +9,7 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<IUniversityService> _universityService;
     private readonly Lazy<IFacultyService> _facultyService;
     private readonly Lazy<IDepartmentService> _departmentService;
+    private readonly Lazy<ISubjectService> _subjectService;
 
 	public ServiceManager(IRepositoryManager repositoryManager, 
 		ILoggerManager logger, IMapper mapper)
@@ -16,9 +17,11 @@ public sealed class ServiceManager : IServiceManager
 		_universityService = new Lazy<IUniversityService>(() => new UniversityService(repositoryManager, logger, mapper));
 		_facultyService = new Lazy<IFacultyService>(() => new FacultyService(repositoryManager, logger, mapper));
 		_departmentService = new Lazy<IDepartmentService>(() => new DepartmentService(repositoryManager, logger, mapper));
+		_subjectService = new Lazy<ISubjectService>(() => new SubjectService(repositoryManager, logger, mapper));
 	}
 
 	public IUniversityService UniversityService => _universityService.Value;
 	public IFacultyService FacultyService => _facultyService.Value;
 	public IDepartmentService DepartmentService => _departmentService.Value;
+	public ISubjectService SubjectService => _subjectService.Value;
 }
