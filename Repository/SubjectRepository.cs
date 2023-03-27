@@ -17,7 +17,7 @@ internal sealed class SubjectRepository : RepositoryBase<Subject>, ISubjectRepos
 
     public void DeleteSubject(Subject subject) => Delete(subject);
 
-    public IEnumerable<Subject> GetAllSubjcest(Guid departmentId, bool trackChanges) =>
+    public IEnumerable<Subject> GetAllSubjcets(Guid departmentId, bool trackChanges) =>
         FindByCondition(s => s.DepartmentId == departmentId, trackChanges)
         .OrderBy(s => s.Name)
         .ToList();
