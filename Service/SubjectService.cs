@@ -126,7 +126,7 @@ public class SubjectService : ISubjectService
         if (subjectEntity is null)
             throw new SubjectNotFoundException(id);
 
-        _mapper.Map(subjectEntity, subject);
+        _mapper.Map(subject, subjectEntity);
         _repository.Save();
     }
 }
