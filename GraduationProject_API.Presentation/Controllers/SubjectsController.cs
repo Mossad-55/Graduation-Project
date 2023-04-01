@@ -5,7 +5,7 @@ using Shared.DataTranferObjects;
 namespace GraduationProject_API.Presentation.Controllers;
 
 [ApiController]
-[Route("api/universities/{universityId}/faculities/{facultyId}/departments/{departmentId}/subjects/{subjectId}/students")]
+[Route("api/universities/{universityId}/faculities/{facultyId}/departments/{departmentId}/subjects")]
 public class SubjectsController : ControllerBase
 {
     private readonly IServiceManager _service;
