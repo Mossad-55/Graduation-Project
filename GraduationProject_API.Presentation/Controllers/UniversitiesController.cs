@@ -6,11 +6,11 @@ namespace GraduationProject_API.Presentation.Controllers;
 
 [Route("api/universities")]
 [ApiController]
-public class UniversityController : ControllerBase
+public class UniversitiesController : ControllerBase
 {
     private readonly IServiceManager _service;
 
-    public UniversityController(IServiceManager service) => _service = service;
+    public UniversitiesController(IServiceManager service) => _service = service;
 
     [HttpGet]
     public IActionResult GetUniversities()
