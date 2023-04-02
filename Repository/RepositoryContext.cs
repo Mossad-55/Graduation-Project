@@ -26,5 +26,5 @@ public class RepositoryContext : DbContext
     public DbSet<Faculty>? Faculties { get; set; }
     public DbSet<Department>? Departments { get; set; }
     public DbSet<Subject>? Subjects { get; set; }
-
+    public DbSet<Questionnaire>? Questionnaires { get; set; }
 }
