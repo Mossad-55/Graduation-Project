@@ -20,7 +20,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         _mapper = mapper;
     }
 
-    public QuestionnaireDto CreateQuestionnaireForSubject(Guid departmentId, Guid subjectId, QuestionnaireForCreateDto questionnaire, bool trackChanges)
+    public QuestionnaireDto CreateQuestionnaireForSubject(Guid departmentId, Guid subjectId, QuestionnaireForCreationDto questionnaire, bool trackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, trackChanges);
         if (subject is null)

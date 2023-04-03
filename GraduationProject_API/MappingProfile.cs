@@ -30,5 +30,10 @@ public class MappingProfile : Profile
             opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
         CreateMap<SubjectForCreationDto, Subject>();
         CreateMap<SubjectForUpdateDto, Subject>();
+
+        // Questionnaire Mapping
+        CreateMap<Questionnaire, QuestionnaireDto>();
+        CreateMap<QuestionnaireForCreationDto, Questionnaire>();
+        CreateMap<QuestionnaireForUpdateDto, Questionnaire>();
     }
 }

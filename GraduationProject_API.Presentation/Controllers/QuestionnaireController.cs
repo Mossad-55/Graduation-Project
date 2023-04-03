@@ -29,7 +29,7 @@ public class QuestionnaireController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateQuestionnaire(Guid departmentId, Guid subjectId, [FromBody] QuestionnaireForCreateDto questionnaire)
+    public IActionResult CreateQuestionnaire(Guid departmentId, Guid subjectId, [FromBody] QuestionnaireForCreationDto questionnaire)
     {
         if (questionnaire is null)
             return BadRequest("Object is null");
