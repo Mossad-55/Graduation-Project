@@ -7,5 +7,6 @@ public interface IServiceManager
     IFacultyService FacultyService { get; }
     IDepartmentService DepartmentService { get; }
     ISubjectService SubjectService { get; }
+    IQuestionnaireService QuestionnaireService { get; }
 
 }
