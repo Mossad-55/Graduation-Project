@@ -57,8 +57,8 @@ internal sealed class FacultyService : IFacultyService
         _repository.Faculty.CreateFacultyForUniversity(universityId, facultyEntity);
         _repository.Save();
 
-        var facultyToReture = _mapper.Map<FacultyDto>(facultyEntity);
-        return facultyToReture;
+        var facultyToReturn = _mapper.Map<FacultyDto>(facultyEntity);
+        return facultyToReturn;
     }
 
     public void DeleteFacultyForUniversity(Guid universityId, Guid id, bool trackChanges)
