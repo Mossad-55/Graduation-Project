@@ -20,16 +20,8 @@ public class SubjectService : ISubjectService
         _mapper = mapper;
     }
 
-    public SubjectDto CreateSubjectForDepartment(Guid universityId, Guid facultyId, Guid departmentId, SubjectForCreationDto subject, bool trackChanges)
+    public SubjectDto CreateSubjectForDepartment(Guid facultyId, Guid departmentId, SubjectForCreationDto subject, bool trackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
-        if (faculty is null)
-            throw new FacultyNotFoundException(facultyId);
-
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
@@ -42,16 +34,8 @@ public class SubjectService : ISubjectService
         return subjectToReturn;
     }
 
-    public void DeleteSubjectForDepartment(Guid universityId, Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
+    public void DeleteSubjectForDepartment(Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
-        if (faculty is null)
-            throw new FacultyNotFoundException(facultyId);
-
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
@@ -64,16 +48,8 @@ public class SubjectService : ISubjectService
         _repository.Save();
     }
 
-    public IEnumerable<SubjectDto> GetAllSubjects(Guid universityId, Guid facultyId, Guid departmentId, bool trackChanges)
+    public IEnumerable<SubjectDto> GetAllSubjects(Guid facultyId, Guid departmentId, bool trackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
-        if (faculty is null)
-            throw new FacultyNotFoundException(facultyId);
-
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
@@ -85,16 +61,8 @@ public class SubjectService : ISubjectService
         return subjectsDto;
     }
 
-    public SubjectDto GetSubject(Guid universityId, Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
+    public SubjectDto GetSubject(Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, trackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
-        if (faculty is null)
-            throw new FacultyNotFoundException(facultyId);
-
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
@@ -108,16 +76,8 @@ public class SubjectService : ISubjectService
         return subjectToReturn;
     }
 
-    public void UpdateSubjectForDepartment(Guid universityId, Guid facultyId, Guid departmentId, Guid id, SubjectForUpdateDto subject, bool otherTrackChanges, bool subTrackChanges)
+    public void UpdateSubjectForDepartment(Guid facultyId, Guid departmentId, Guid id, SubjectForUpdateDto subject, bool otherTrackChanges, bool subTrackChanges)
     {
-        var university = _repository.University.GetUniversity(universityId, otherTrackChanges);
-        if (university is null)
-            throw new UniversityNotFoundException(universityId);
-
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, otherTrackChanges);
-        if (faculty is null)
-            throw new FacultyNotFoundException(facultyId);
-
         var department = _repository.Department.GetDepartment(facultyId, departmentId, otherTrackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);

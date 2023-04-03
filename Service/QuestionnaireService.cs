@@ -20,7 +20,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         _mapper = mapper;
     }
 
-    public QuestionnaireDto CreateQuestionnaireForSubject(Guid universityId, Guid facultyId, Guid departmentId, Guid subjectId, QuestionnaireForCreateDto questionnaire, bool trackChanges)
+    public QuestionnaireDto CreateQuestionnaireForSubject(Guid departmentId, Guid subjectId, QuestionnaireForCreateDto questionnaire, bool trackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, trackChanges);
         if (subject is null)
@@ -35,7 +35,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         return questionnaireToReturn;
     }
 
-    public void DeleteQuestionnaireForSubject(Guid universityId, Guid facultyId, Guid departmentId, Guid subjectId, Guid id, bool trackChanges)
+    public void DeleteQuestionnaireForSubject(Guid departmentId, Guid subjectId, Guid id, bool trackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, trackChanges);
         if (subject is null)
@@ -49,7 +49,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         _repository.Save();
     }
 
-    public IEnumerable<QuestionnaireDto> GetAllQuestionnaires(Guid universityId, Guid facultyId, Guid departmentId, Guid subjectId, bool trackChanges)
+    public IEnumerable<QuestionnaireDto> GetAllQuestionnaires(Guid departmentId, Guid subjectId, bool trackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, trackChanges);
         if (subject is null)
@@ -61,7 +61,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         return questionnairesDto;
     }
 
-    public QuestionnaireDto GetQuestionnaire(Guid universityId, Guid facultyId, Guid departmentId, Guid subjectId, Guid id, bool trackChanges)
+    public QuestionnaireDto GetQuestionnaire(Guid departmentId, Guid subjectId, Guid id, bool trackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, trackChanges);
         if (subject is null)
@@ -75,7 +75,7 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         return questionnaireDto;
     }
 
-    public void UpdateQuestionnaireForSubject(Guid universityId, Guid facultyId, Guid departmentId, Guid subjectId, Guid id, QuestionnaireForUpdateDto questionnaire, bool otherTrackChanges, bool quesTrackChanges)
+    public void UpdateQuestionnaireForSubject(Guid departmentId, Guid subjectId, Guid id, QuestionnaireForUpdateDto questionnaire, bool otherTrackChanges, bool quesTrackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, otherTrackChanges);
         if (subject is null)
