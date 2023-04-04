@@ -6,11 +6,11 @@ namespace GraduationProject_API.Presentation.Controllers;
 
 [ApiController]
 [Route("api/departments/{departmentId}/subjects/{subjectId}/questionnaires")]
-public class QuestionnaireController : ControllerBase
+public class QuestionnairesController : ControllerBase
 {
     private readonly IServiceManager _service;
 
-    public QuestionnaireController(IServiceManager service) => _service = service;
+    public QuestionnairesController(IServiceManager service) => _service = service;
 
     [HttpGet]
     public IActionResult GetQuestionnairesForSubject(Guid departmentId, Guid subjectId)
