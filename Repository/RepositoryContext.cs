@@ -22,6 +22,8 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new FacultyConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
         modelBuilder.ApplyConfiguration(new SubjectConfiguration());
+
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
     }
 
     // DbSets Here.
