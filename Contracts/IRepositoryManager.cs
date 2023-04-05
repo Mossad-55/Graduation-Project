@@ -8,6 +8,7 @@ public interface IRepositoryManager
     IDepartmentRepository Department { get; }
     ISubjectRepository Subject { get; }
     IQuestionnaireRepository Questionnaire { get; }
+    IUniversityAdminRepository UniversityAdmin { get; }
 
     // Shared Functions.
     void Save();

@@ -10,4 +10,5 @@ public class UniversityAdmin
     [ForeignKey(nameof(University))]
     public Guid UniversityId { get; set; }
     public University? University { get; set; }
+
 }
