@@ -46,5 +46,9 @@ public class MappingProfile : Profile
         CreateMap<UniversityAdminForUpdateDto, User>()
             .ForMember(u => u.UserName,
             opts => opts.MapFrom(x => x.Email));
+        CreateMap<UniversityAdminDto, UniversityAdmin>();
+        CreateMap<User, UniversityAdmin>()
+            .ForMember(a => a.FullName,
+            opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
     }
 }
