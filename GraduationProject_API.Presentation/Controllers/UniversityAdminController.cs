@@ -29,7 +29,7 @@ public class UniversityAdminController : ControllerBase
 
     [HttpPut("{id:Guid}")]
     public async Task<IActionResult> UpdateAdminDetails(Guid universityId, Guid id, 
-        [FromBody] UniversityAdminForUpdateDto admin)
+        [FromBody] AdminForUpdateDto admin)
     {
         if (admin is null)
             return BadRequest("Object is null");

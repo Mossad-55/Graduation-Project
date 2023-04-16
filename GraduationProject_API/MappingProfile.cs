@@ -37,16 +37,16 @@ public class MappingProfile : Profile
         CreateMap<QuestionnaireForUpdateDto, Questionnaire>();
 
         // University Admin Mapping
-        CreateMap<User, UniversityAdminDto>()
+        CreateMap<User, AdminDto>()
             .ForMember(a => a.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
-        CreateMap<UniversityAdminForCreationDto, User>()
+        CreateMap<AdminForCreationDto, User>()
             .ForMember(u => u.UserName,
             opts => opts.MapFrom(x => x.Email));
-        CreateMap<UniversityAdminForUpdateDto, User>()
+        CreateMap<AdminForUpdateDto, User>()
             .ForMember(u => u.UserName,
             opts => opts.MapFrom(x => x.Email));
-        CreateMap<UniversityAdminDto, UniversityAdmin>();
+        CreateMap<AdminDto, UniversityAdmin>();
         CreateMap<User, UniversityAdmin>()
             .ForMember(a => a.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));

@@ -5,6 +5,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Service.Contracts;
 using Shared.DataTranferObjects;
+using Shared.Utilities;
 
 namespace Service;
 
@@ -23,7 +24,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         _userManager = userManager;
     }
 
-    public async Task<UniversityAdminDto> CreateAdminForUniversity(Guid universityId, UniversityAdminForCreationDto admin, bool trackChanges)
+    public async Task<AdminDto> CreateAdminForUniversity(Guid universityId, AdminForCreationDto admin, bool trackChanges)
     {
         // Check for university
         var university = _repository.University.GetUniversity(universityId, trackChanges);
@@ -39,12 +40,12 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         // Creating the user and hashing the passowrd.
         var result = await _userManager.CreateAsync(user, admin.Password);
-        if (!result.Succeeded) // Change this to result.Succeeded later
-            throw new UserCreationFailedException("Uiversity Admin"); // Change this later when adding static class.
+        if (!result.Succeeded) 
+            throw new UserCreationFailedException(StaticData.UniversityAdminRole); // Change this later when adding static class.
 
-        await _userManager.AddToRoleAsync(user, "University Admin"); // Change this later when adding static class.
+        await _userManager.AddToRoleAsync(user, StaticData.UniversityAdminRole); // Change this later when adding static class.
 
-        var universityAdminToReturn = _mapper.Map<UniversityAdminDto>(user);
+        var universityAdminToReturn = _mapper.Map<AdminDto>(user);
 
         var universityAdmin = _mapper.Map<UniversityAdmin>(universityAdminToReturn);
         universityAdmin.UniversityId = universityId;
@@ -71,7 +72,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         _repository.Save();
     }
 
-    public async Task<IEnumerable<UniversityAdminDto>> GetAllAdmins(Guid universityId, bool trackChanges)
+    public async Task<IEnumerable<AdminDto>> GetAllAdmins(Guid universityId, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, trackChanges);
         if (university is null)
@@ -79,18 +80,18 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         var universityAdmins = _repository.UniversityAdmin.GetAllUniversityAdmins(universityId, trackChanges);
 
-        List<User> users = new();
+        var users = Enumerable.Empty<User>();
         foreach (var admin in universityAdmins)
         {
             var user = await _userManager.FindByIdAsync(admin.Id.ToString());
-            users.Add(user);
+            users.Append(user);
         }
 
-        var universityAdminsDto = _mapper.Map<IEnumerable<UniversityAdminDto>>(users);
+        var universityAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
         return universityAdminsDto;
     }
 
-    public async Task<UniversityAdminDto> GetUniveristyAdmin(Guid universityId, Guid id, bool trackChanges)
+    public async Task<AdminDto> GetUniveristyAdmin(Guid universityId, Guid id, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, trackChanges);
         if (university is null)
@@ -100,11 +101,11 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         if (user is null)
             throw new UserNotFoundException(id);
 
-        var universityAdminDto = _mapper.Map<UniversityAdminDto>(user);
+        var universityAdminDto = _mapper.Map<AdminDto>(user);
         return universityAdminDto;
     }
 
-    public async Task UpdateAdminForUniversity(Guid universityId, Guid id, UniversityAdminForUpdateDto admin, bool uniTrackChanges, bool admTrackChanges)
+    public async Task UpdateAdminForUniversity(Guid universityId, Guid id, AdminForUpdateDto admin, bool uniTrackChanges, bool admTrackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, uniTrackChanges);
         if (university is null)

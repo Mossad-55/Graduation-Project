@@ -1,6 +1,6 @@
 ﻿namespace Shared.DataTranferObjects;
 
-public record UniversityAdminDto()
+public record AdminDto
 {
     public Guid Id { get; init; }
     public string FullName { get; init; }
