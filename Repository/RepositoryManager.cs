@@ -12,6 +12,7 @@ public sealed class RepositoryManager : IRepositoryManager
     private readonly Lazy<IQuestionnaireRepository> _questionnaireRepository;
     private readonly Lazy<IUniversityAdminRepository> _universityAdminRepository;
     private readonly Lazy<IFacultyAdminRepository> _facultyAdminRepository;
+    private readonly Lazy<IDepartmentAdminRepository> _departmentAdminRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -23,6 +24,7 @@ public sealed class RepositoryManager : IRepositoryManager
         _questionnaireRepository = new Lazy<IQuestionnaireRepository>(() => new QuestionnaireRepository(repositoryContext));
         _universityAdminRepository = new Lazy<IUniversityAdminRepository>(() => new UniversityAdminRepository(repositoryContext));
         _facultyAdminRepository = new Lazy<IFacultyAdminRepository>(() => new FacultyAdminRepository(repositoryContext));
+        _departmentAdminRepository = new Lazy<IDepartmentAdminRepository>(() => new DepartmentAdminRepository(repositoryContext));
     }
 
     public IUniversityRepository University => _universityRepository.Value;
@@ -32,6 +34,7 @@ public sealed class RepositoryManager : IRepositoryManager
     public IQuestionnaireRepository Questionnaire => _questionnaireRepository.Value;
     public IUniversityAdminRepository UniversityAdmin => _universityAdminRepository.Value;
     public IFacultyAdminRepository FacultyAdmin =>  _facultyAdminRepository.Value;
+    public IDepartmentAdminRepository DepartmentAdmin =>  _departmentAdminRepository.Value;
 
 
     public void Save() => _repositoryContext.SaveChanges();

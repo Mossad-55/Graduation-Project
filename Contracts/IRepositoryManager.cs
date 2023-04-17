@@ -10,6 +10,7 @@ public interface IRepositoryManager
     IQuestionnaireRepository Questionnaire { get; }
     IUniversityAdminRepository UniversityAdmin { get; }
     IFacultyAdminRepository FacultyAdmin { get; }
+    IDepartmentAdminRepository DepartmentAdmin { get; }
 
     // Shared Functions.
     void Save();
