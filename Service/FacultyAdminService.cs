@@ -37,16 +37,16 @@ internal sealed class FacultyAdminService : IFacultyAdminService
 
         var result = await _userManager.CreateAsync(user, admin.Password);
         if (!result.Succeeded)
-            throw new UserCreationFailedException(StaticData.FacultyAdminRole); // Change it later.
+            throw new UserCreationFailedException(StaticData.FacultyAdminRole); 
 
-        await _userManager.AddToRoleAsync(user, StaticData.FacultyAdminRole); // Change it later.
+        await _userManager.AddToRoleAsync(user, StaticData.FacultyAdminRole); 
 
         var facultyAdminToReturn = _mapper.Map<AdminDto>(user);
 
         var facultyAdmin = _mapper.Map<FacultyAdmin>(facultyAdminToReturn);
         facultyAdmin.FacultyId = facultyId;
 
-        _repository.FacultyAdmin.CreateFacultyAdmin(facultyId, facultyAdmin);
+        _repository.FacultyAdmin.CreateFacultyAdmin(universityId, facultyId, facultyAdmin);
         _repository.Save();
 
         return facultyAdminToReturn;
@@ -77,11 +77,11 @@ internal sealed class FacultyAdminService : IFacultyAdminService
 
         var facultyAdmins = _repository.FacultyAdmin.GetAllFacultyAdmins(facultyId, trackChanges);
 
-        var users = Enumerable.Empty<User>();
+        var users = new List<User>();
         foreach (var admin in facultyAdmins)
         {
             var user = await _userManager.FindByIdAsync(admin.Id.ToString());
-            users.Append(user);
+            users.Add(user);
         }
 
         var facultyAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
@@ -113,10 +113,6 @@ internal sealed class FacultyAdminService : IFacultyAdminService
             throw new UserNotFoundException(id);
 
         _mapper.Map(admin, user);
-        await _userManager.UpdateAsync(user);
-        var facultyAdmin = _repository.FacultyAdmin.GetFacultyAdmin(facultyId, id, admTrackChanges);
-
-        _mapper.Map(user, facultyAdmin);
         _repository.Save();
     }
 }

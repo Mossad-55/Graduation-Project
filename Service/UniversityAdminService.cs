@@ -41,9 +41,9 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         // Creating the user and hashing the passowrd.
         var result = await _userManager.CreateAsync(user, admin.Password);
         if (!result.Succeeded) 
-            throw new UserCreationFailedException(StaticData.UniversityAdminRole); // Change this later when adding static class.
+            throw new UserCreationFailedException(StaticData.UniversityAdminRole); 
 
-        await _userManager.AddToRoleAsync(user, StaticData.UniversityAdminRole); // Change this later when adding static class.
+        await _userManager.AddToRoleAsync(user, StaticData.UniversityAdminRole); 
 
         var universityAdminToReturn = _mapper.Map<AdminDto>(user);
 
@@ -80,15 +80,16 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         var universityAdmins = _repository.UniversityAdmin.GetAllUniversityAdmins(universityId, trackChanges);
 
-        var users = Enumerable.Empty<User>();
+        var users = new List<User>();
         foreach (var admin in universityAdmins)
         {
             var user = await _userManager.FindByIdAsync(admin.Id.ToString());
-            users.Append(user);
+            users.Add(user);
         }
-
+        
         var universityAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
         return universityAdminsDto;
+
     }
 
     public async Task<AdminDto> GetUniveristyAdmin(Guid universityId, Guid id, bool trackChanges)
@@ -116,9 +117,6 @@ internal sealed class UniversityAdminService : IUniversityAdminService
             throw new UserNotFoundException(id);
 
         _mapper.Map(admin, user);
-        await _userManager.UpdateAsync(user);
-        var universityAdmin = _repository.UniversityAdmin.GetUniversityAdmin(universityId, id, admTrackChanges);
-        _mapper.Map(user, universityAdmin);
         _repository.Save();
     }
 }

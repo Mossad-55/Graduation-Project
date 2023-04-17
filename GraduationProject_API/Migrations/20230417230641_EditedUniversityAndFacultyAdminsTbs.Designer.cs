@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230417230641_EditedUniversityAndFacultyAdminsTbs")]
+    partial class EditedUniversityAndFacultyAdminsTbs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -157,14 +159,9 @@ namespace GraduationProject_API.Migrations
                     b.Property<Guid>("FacultyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UniveristyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("FacultyId");
-
-                    b.HasIndex("UniveristyId");
 
                     b.ToTable("FacultyAdmins");
                 });
@@ -458,36 +455,36 @@ namespace GraduationProject_API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bda0c218-5cce-4b25-8a7c-842bc798dba8",
-                            ConcurrencyStamp = "080edc6c-7eba-4996-bb95-7122df5f987f",
+                            Id = "a82c50d1-615e-4943-97b7-9daad4022628",
+                            ConcurrencyStamp = "03944695-5ee6-44df-a212-ab99878affdc",
                             Name = "University Admin",
                             NormalizedName = "UNIVERSITY ADMIN"
                         },
                         new
                         {
-                            Id = "754176ea-e0f2-4c3a-9bc2-45d2e2da0a8a",
-                            ConcurrencyStamp = "c45fde80-68a9-41ba-addc-fc0d84bbc27c",
+                            Id = "6d7998ce-f9ce-408a-99ab-6f8e48bd44b0",
+                            ConcurrencyStamp = "85be79d3-1932-4ea3-90a4-247ac26d719e",
                             Name = "Faculty Admin",
                             NormalizedName = "FACULTY ADMIN"
                         },
                         new
                         {
-                            Id = "abdb99d5-e073-4dfb-9802-3a475f3041e8",
-                            ConcurrencyStamp = "8a1918da-d6a4-4301-8e77-740e83fd04ca",
+                            Id = "2203cce6-d616-40e4-a75b-24e3aeb03f33",
+                            ConcurrencyStamp = "056b8d31-68b0-49bb-9831-fc5f5e34e961",
                             Name = "Department Admin",
                             NormalizedName = "DEPARTMENT ADMIN"
                         },
                         new
                         {
-                            Id = "5d3e5560-99a9-4e1e-850c-871d6c3aafcb",
-                            ConcurrencyStamp = "f0cfd533-602a-4c11-bea4-3dba3c78f860",
+                            Id = "fe595817-f883-491d-8413-d676d8ab489f",
+                            ConcurrencyStamp = "2f288d02-3ae6-430b-a2ac-df7578619b95",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         },
                         new
                         {
-                            Id = "513c3d9b-d23b-4929-9b7a-5ff1c2ee34d9",
-                            ConcurrencyStamp = "18293d20-ec7c-4aca-970e-f75cfe8ff8b2",
+                            Id = "d9a63c8d-7e8f-4a5b-93a6-f5a292a381fd",
+                            ConcurrencyStamp = "e2ac14c7-ef51-4f47-b62e-6366e1d5a60d",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -629,15 +626,7 @@ namespace GraduationProject_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.University", "University")
-                        .WithMany()
-                        .HasForeignKey("UniveristyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Faculty");
-
-                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("Entities.Models.Questionnaire", b =>

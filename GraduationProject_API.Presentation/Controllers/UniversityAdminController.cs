@@ -37,4 +37,14 @@ public class UniversityAdminController : ControllerBase
         await _service.UniversityAdminService.UpdateAdminForUniversity(universityId, id, admin, false, true);
         return NoContent();
     }
+
+    [HttpPost]
+    public async Task<IActionResult> CreateAdmin(Guid universityId, [FromBody] AdminForCreationDto admin)
+    {
+        if (admin is null)
+            return BadRequest("Object is null");
+
+        var result = await _service.UniversityAdminService.CreateAdminForUniversity(universityId, admin, false);
+        return CreatedAtRoute("GetUniversityAdmin", new { universityId, result.Id }, result);
+    }
 }

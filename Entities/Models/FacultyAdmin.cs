@@ -5,7 +5,10 @@ namespace Entities.Models;
 public class FacultyAdmin
 {
     public Guid Id { get; set; }
-    public string? FullName { get; set; }
+
+    [ForeignKey(nameof(University))]
+    public Guid UniveristyId { get; set; }
+    public University? University { get; set; }
 
     [ForeignKey(nameof(Faculty))]
     public Guid FacultyId { get; set; }

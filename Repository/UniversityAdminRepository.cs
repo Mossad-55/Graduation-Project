@@ -19,7 +19,6 @@ internal sealed class UniversityAdminRepository : RepositoryBase<UniversityAdmin
 
     public IEnumerable<UniversityAdmin> GetAllUniversityAdmins(Guid universityId, bool trackChanges) =>
         FindByCondition(a => a.UniversityId == universityId, trackChanges)
-        .OrderBy(a => a.FullName)
         .ToList();
 
     public UniversityAdmin GetUniversityAdmin(Guid universityId, Guid id, bool trackChanges) =>
