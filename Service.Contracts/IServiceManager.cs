@@ -9,5 +9,6 @@ public interface IServiceManager
     ISubjectService SubjectService { get; }
     IQuestionnaireService QuestionnaireService { get; }
     IUniversityAdminService UniversityAdminService { get; }
+    IFacultyAdminService FacultyAdminService { get; }
 
 }
