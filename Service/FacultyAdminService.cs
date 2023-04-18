@@ -44,7 +44,6 @@ internal sealed class FacultyAdminService : IFacultyAdminService
         var facultyAdminToReturn = _mapper.Map<AdminDto>(user);
 
         var facultyAdmin = _mapper.Map<FacultyAdmin>(facultyAdminToReturn);
-        facultyAdmin.FacultyId = facultyId;
 
         _repository.FacultyAdmin.CreateFacultyAdmin(universityId, facultyId, facultyAdmin);
         _repository.Save();

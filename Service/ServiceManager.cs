@@ -15,6 +15,7 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<IQuestionnaireService> _questionnaireService;
     private readonly Lazy<IUniversityAdminService> _universityAdminService;
     private readonly Lazy<IFacultyAdminService> _facultyAdminService;
+    private readonly Lazy<IDepartmentAdminService> _departmentAdminService;
 
 	public ServiceManager(IRepositoryManager repositoryManager, 
 		ILoggerManager logger, IMapper mapper, UserManager<User> userManager)
@@ -26,6 +27,7 @@ public sealed class ServiceManager : IServiceManager
 		_questionnaireService = new Lazy<IQuestionnaireService>(() => new QuestionnaireService(repositoryManager, logger, mapper));
 		_universityAdminService = new Lazy<IUniversityAdminService>(() => new UniversityAdminService(repositoryManager, logger, mapper, userManager));
 		_facultyAdminService = new Lazy<IFacultyAdminService>(() => new FacultyAdminService(repositoryManager, logger, mapper, userManager));
+		_departmentAdminService = new Lazy<IDepartmentAdminService>(() => new DepartmentAdminService(repositoryManager, logger, mapper, userManager));
 	}
 
 	public IUniversityService UniversityService => _universityService.Value;
@@ -35,4 +37,5 @@ public sealed class ServiceManager : IServiceManager
 	public IQuestionnaireService QuestionnaireService => _questionnaireService.Value;
 	public IUniversityAdminService UniversityAdminService => _universityAdminService.Value;
 	public IFacultyAdminService FacultyAdminService => _facultyAdminService.Value;
+	public IDepartmentAdminService DepartmentAdminService => _departmentAdminService.Value;
 }
