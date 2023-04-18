@@ -44,7 +44,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
             throw new UserCreationFailedException(StaticData.UniversityAdminRole); 
 
         await _userManager.AddToRoleAsync(user, StaticData.UniversityAdminRole); 
-
+        
         var universityAdminToReturn = _mapper.Map<AdminDto>(user);
 
         var universityAdmin = _mapper.Map<UniversityAdmin>(universityAdminToReturn);
