@@ -24,7 +24,7 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
         _userManager = userManager;
     }
 
-    public async Task<AdminDto> CreateAdminForDepartment(Guid universityId, Guid facultyId, Guid departmentId, AdminForCreationDto admin, bool trackChanges)
+    public async Task<AdminDto> CreateAdminForDepartment(Guid facultyId, Guid departmentId, AdminForCreationDto admin, bool trackChanges)
     {
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
@@ -45,7 +45,7 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
 
         var departmentAdmin = _mapper.Map<DepartmentAdmin>(adminToReturn);
 
-        _repository.DepartmentAdmin.CreateDepartmentAdmin(universityId, facultyId, departmentId, departmentAdmin);
+        _repository.DepartmentAdmin.CreateDepartmentAdmin(department.FacultyId, facultyId, departmentId, departmentAdmin);
         _repository.Save();
 
         return adminToReturn;
@@ -101,7 +101,7 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
         return adminDto;
     }
 
-    public async Task UpdateAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, AdminForUpdateDto admin, bool othTrackChanges, bool admTrackChanges)
+    public async Task UpdateAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, AdminForUpdateDto admin, bool trackChanges)
     {
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)

@@ -35,7 +35,7 @@ public class FacultyAdminsController : ControllerBase
         if (admin is null)
             return BadRequest("Object is null");
 
-        await _service.FacultyAdminService.UpdateAdminForFaculty(universityId, facultyId, id, admin, false, true);
+        await _service.FacultyAdminService.UpdateAdminForFaculty(universityId, facultyId, id, admin, false);
         return NoContent();
     }
 

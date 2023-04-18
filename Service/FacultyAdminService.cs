@@ -101,9 +101,9 @@ internal sealed class FacultyAdminService : IFacultyAdminService
         return adminDto;
     }
 
-    public async Task UpdateAdminForFaculty(Guid universityId, Guid facultyId, Guid id, AdminForUpdateDto admin, bool facTrackChanges, bool admTrackChanges)
+    public async Task UpdateAdminForFaculty(Guid universityId, Guid facultyId, Guid id, AdminForUpdateDto admin, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, facTrackChanges);
+        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
