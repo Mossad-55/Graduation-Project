@@ -19,7 +19,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 Email = "john.doe@example.com",
                 NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<User>().HashPassword(null, "Password@123"),
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "Mossad5522!"),
                 SecurityStamp = Guid.NewGuid().ToString(),
                 ConcurrencyStamp = Guid.NewGuid().ToString(),
                 FirstName = "John",

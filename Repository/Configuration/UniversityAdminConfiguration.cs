@@ -12,7 +12,7 @@ public class UniversityAdminConfiguration : IEntityTypeConfiguration<UniversityA
         (
             new UniversityAdmin
             {
-                Id = new Guid("8c67d240-d00a-4262-a286-c1027d6d0f9b"),
+                Id = new Guid("99328045-8ECF-40A1-9F0B-0DEA6398F09A"),
                 UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
             }
         );
