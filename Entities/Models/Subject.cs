@@ -21,4 +21,6 @@ public class Subject
     [ForeignKey(nameof(Department))]
     public Guid DepartmentId { get; set; }
     public Department? Department { get; set; }
+
+    public ICollection<Professor>? Professors { get; set; }
 }

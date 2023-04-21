@@ -11,6 +11,7 @@ public interface IRepositoryManager
     IUniversityAdminRepository UniversityAdmin { get; }
     IFacultyAdminRepository FacultyAdmin { get; }
     IDepartmentAdminRepository DepartmentAdmin { get; }
+    IProfessorRepository Professor { get; }
 
     // Shared Functions.
     void Save();
