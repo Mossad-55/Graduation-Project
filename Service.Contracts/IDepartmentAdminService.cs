@@ -4,9 +4,9 @@ namespace Service.Contracts;
 
 public interface IDepartmentAdminService
 {
-    Task<IEnumerable<AdminDto>> GetAllAdmins(Guid facultyId, Guid departmentId, bool trackChanges);
-    Task<AdminDto> GetDepartmentAdmin(Guid facultyId, Guid departmentId, Guid id, bool trackChanges);
-    Task<AdminDto> CreateAdminForDepartment(Guid facultyId, Guid departmentId, AdminForCreationDto admin, bool trackChanges);
-    Task DeleteAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, bool trackChanges);
-    Task UpdateAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, AdminForUpdateDto admin, bool trackChanges);
+    Task<IEnumerable<UserDto>> GetAllAdmins(Guid departmentId, bool trackChanges);
+    Task<UserDto> GetDepartmentAdmin(Guid departmentId, Guid id, bool trackChanges);
+    Task<UserDto> CreateAdminForDepartment(Guid departmentId, UserForCreationDto admin, bool trackChanges);
+    Task DeleteAdminForDepartment(Guid departmentId, Guid id, bool trackChanges);
+    Task UpdateAdminForDepartment(Guid departmentId, Guid id, UserForUpdateDto admin, bool trackChanges);
 }

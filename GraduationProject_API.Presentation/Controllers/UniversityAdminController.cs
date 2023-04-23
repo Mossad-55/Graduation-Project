@@ -29,7 +29,7 @@ public class UniversityAdminController : ControllerBase
 
     [HttpPut("{id:Guid}")]
     public async Task<IActionResult> UpdateAdminDetails(Guid universityId, Guid id, 
-        [FromBody] AdminForUpdateDto admin)
+        [FromBody] UserForUpdateDto admin)
     {
         if (admin is null)
             return BadRequest("Object is null");
@@ -39,7 +39,7 @@ public class UniversityAdminController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAdmin(Guid universityId, [FromBody] AdminForCreationDto admin)
+    public async Task<IActionResult> CreateAdmin(Guid universityId, [FromBody] UserForCreationDto admin)
     {
         if (admin is null)
             return BadRequest("Object is null");

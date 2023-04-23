@@ -24,7 +24,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         _userManager = userManager;
     }
 
-    public async Task<AdminDto> CreateAdminForUniversity(Guid universityId, AdminForCreationDto admin, bool trackChanges)
+    public async Task<UserDto> CreateAdminForUniversity(Guid universityId, UserForCreationDto admin, bool trackChanges)
     {
         // Check for university
         var university = _repository.University.GetUniversity(universityId, trackChanges);
@@ -45,7 +45,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         await _userManager.AddToRoleAsync(user, StaticData.UniversityAdminRole); 
         
-        var universityAdminToReturn = _mapper.Map<AdminDto>(user);
+        var universityAdminToReturn = _mapper.Map<UserDto>(user);
 
         var universityAdmin = _mapper.Map<UniversityAdmin>(universityAdminToReturn);
         universityAdmin.UniversityId = universityId;
@@ -72,7 +72,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         _repository.Save();
     }
 
-    public async Task<IEnumerable<AdminDto>> GetAllAdmins(Guid universityId, bool trackChanges)
+    public async Task<IEnumerable<UserDto>> GetAllAdmins(Guid universityId, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, trackChanges);
         if (university is null)
@@ -87,12 +87,12 @@ internal sealed class UniversityAdminService : IUniversityAdminService
             users.Add(user);
         }
         
-        var universityAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
+        var universityAdminsDto = _mapper.Map<IEnumerable<UserDto>>(users);
         return universityAdminsDto;
 
     }
 
-    public async Task<AdminDto> GetUniveristyAdmin(Guid universityId, Guid id, bool trackChanges)
+    public async Task<UserDto> GetUniveristyAdmin(Guid universityId, Guid id, bool trackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, trackChanges);
         if (university is null)
@@ -102,11 +102,11 @@ internal sealed class UniversityAdminService : IUniversityAdminService
         if (user is null)
             throw new UserNotFoundException(id);
 
-        var universityAdminDto = _mapper.Map<AdminDto>(user);
+        var universityAdminDto = _mapper.Map<UserDto>(user);
         return universityAdminDto;
     }
 
-    public async Task UpdateAdminForUniversity(Guid universityId, Guid id, AdminForUpdateDto admin, bool uniTrackChanges, bool admTrackChanges)
+    public async Task UpdateAdminForUniversity(Guid universityId, Guid id, UserForUpdateDto admin, bool uniTrackChanges, bool admTrackChanges)
     {
         var university = _repository.University.GetUniversity(universityId, uniTrackChanges);
         if (university is null)

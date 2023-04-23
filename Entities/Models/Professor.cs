@@ -5,6 +5,7 @@ namespace Entities.Models;
 public class Professor
 {
     public Guid Id { get; set; }
+    public double Rate { get; set; }
 
     [ForeignKey(nameof(University))]
     public Guid UniveristyId { get; set; }

@@ -4,9 +4,9 @@ namespace Service.Contracts;
 
 public interface IFacultyAdminService
 {
-    Task<IEnumerable<AdminDto>> GetAllAdmins(Guid universityId, Guid facultyId, bool trackChanges);
-    Task<AdminDto> GetFacultyAdmin(Guid universityId, Guid facultyId, Guid id, bool trackChanges);
-    Task<AdminDto> CreateAdminForFaculty(Guid universityId, Guid facultyId, AdminForCreationDto admin, bool trackChanges);
-    Task DeleteAdminForFaculty(Guid universityId, Guid facultyId, Guid id, bool trackChanges);
-    Task UpdateAdminForFaculty(Guid universityId, Guid facultyId, Guid id, AdminForUpdateDto admin, bool trackChanges);
+    Task<IEnumerable<UserDto>> GetAllAdmins(Guid facultyId, bool trackChanges);
+    Task<UserDto> GetFacultyAdmin(Guid facultyId, Guid id, bool trackChanges);
+    Task<UserDto> CreateAdminForFaculty(Guid facultyId, UserForCreationDto admin, bool trackChanges);
+    Task DeleteAdminForFaculty(Guid facultyId, Guid id, bool trackChanges);
+    Task UpdateAdminForFaculty(Guid facultyId, Guid id, UserForUpdateDto admin, bool trackChanges);
 }

@@ -25,4 +25,8 @@ internal sealed class DepartmentRepository : RepositoryBase<Department>, IDepart
     public Department GetDepartment(Guid facultyId, Guid id, bool trackChanges) =>
         FindByCondition(d => d.FacultyId == facultyId && d.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public Department GetDepartmentById(Guid id, bool trackChanges) =>
+        FindByCondition(d => d.Id == id, trackChanges)
+        .FirstOrDefault();
 }

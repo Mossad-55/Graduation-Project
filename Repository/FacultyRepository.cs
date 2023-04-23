@@ -25,4 +25,8 @@ internal sealed class FacultyRepository : RepositoryBase<Faculty>, IFacultyRepos
     public Faculty GetFaculty(Guid universityId, Guid id, bool trackChange) =>
         FindByCondition(f => f.UniversityId == universityId && f.Id == id, trackChange)
         .FirstOrDefault();
+
+    public Faculty GetFacultyById(Guid id, bool trackChanges) =>
+        FindByCondition(f => f.Id == id, trackChanges)
+        .FirstOrDefault();
 }

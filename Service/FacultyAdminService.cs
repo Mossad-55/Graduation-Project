@@ -24,9 +24,9 @@ internal sealed class FacultyAdminService : IFacultyAdminService
         _userManager = userManager;
     }
 
-    public async Task<AdminDto> CreateAdminForFaculty(Guid universityId, Guid facultyId, AdminForCreationDto admin, bool trackChanges)
+    public async Task<UserDto> CreateAdminForFaculty(Guid facultyId, UserForCreationDto admin, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
@@ -41,19 +41,19 @@ internal sealed class FacultyAdminService : IFacultyAdminService
 
         await _userManager.AddToRoleAsync(user, StaticData.FacultyAdminRole); 
 
-        var facultyAdminToReturn = _mapper.Map<AdminDto>(user);
+        var facultyAdminToReturn = _mapper.Map<UserDto>(user);
 
         var facultyAdmin = _mapper.Map<FacultyAdmin>(facultyAdminToReturn);
 
-        _repository.FacultyAdmin.CreateFacultyAdmin(universityId, facultyId, facultyAdmin);
+        _repository.FacultyAdmin.CreateFacultyAdmin(faculty.UniversityId, facultyId, facultyAdmin);
         _repository.Save();
 
         return facultyAdminToReturn;
     }
 
-    public async Task DeleteAdminForFaculty(Guid universityId, Guid facultyId, Guid id, bool trackChanges)
+    public async Task DeleteAdminForFaculty(Guid facultyId, Guid id, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
@@ -68,9 +68,9 @@ internal sealed class FacultyAdminService : IFacultyAdminService
         _repository.Save();
     }
 
-    public async Task<IEnumerable<AdminDto>> GetAllAdmins(Guid universityId, Guid facultyId, bool trackChanges)
+    public async Task<IEnumerable<UserDto>> GetAllAdmins(Guid facultyId, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
@@ -83,13 +83,13 @@ internal sealed class FacultyAdminService : IFacultyAdminService
             users.Add(user);
         }
 
-        var facultyAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
+        var facultyAdminsDto = _mapper.Map<IEnumerable<UserDto>>(users);
         return facultyAdminsDto;
     }
 
-    public async Task<AdminDto> GetFacultyAdmin(Guid universityId, Guid facultyId, Guid id, bool trackChanges)
+    public async Task<UserDto> GetFacultyAdmin(Guid facultyId, Guid id, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 
@@ -97,13 +97,13 @@ internal sealed class FacultyAdminService : IFacultyAdminService
         if (user is null)
             throw new UserNotFoundException(id);
 
-        var adminDto = _mapper.Map<AdminDto>(user);
+        var adminDto = _mapper.Map<UserDto>(user);
         return adminDto;
     }
 
-    public async Task UpdateAdminForFaculty(Guid universityId, Guid facultyId, Guid id, AdminForUpdateDto admin, bool trackChanges)
+    public async Task UpdateAdminForFaculty(Guid facultyId, Guid id, UserForUpdateDto admin, bool trackChanges)
     {
-        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
         if (faculty is null)
             throw new FacultyNotFoundException(facultyId);
 

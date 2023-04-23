@@ -24,11 +24,13 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
         _userManager = userManager;
     }
 
-    public async Task<AdminDto> CreateAdminForDepartment(Guid facultyId, Guid departmentId, AdminForCreationDto admin, bool trackChanges)
+    public async Task<UserDto> CreateAdminForDepartment(Guid departmentId, UserForCreationDto admin, bool trackChanges)
     {
-        var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
+        var department = _repository.Department.GetDepartmentById(departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
+
+        var faculty = _repository.Faculty.GetFacultyById(department.FacultyId, trackChanges);
 
         if (await _userManager.FindByEmailAsync(admin.Email) is not null)
             throw new EmailFoundException(admin.Email);
@@ -41,19 +43,19 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
 
         await _userManager.AddToRoleAsync(user, StaticData.DepartmentAdminRole);
 
-        var adminToReturn = _mapper.Map<AdminDto>(user);
+        var adminToReturn = _mapper.Map<UserDto>(user);
 
         var departmentAdmin = _mapper.Map<DepartmentAdmin>(adminToReturn);
 
-        _repository.DepartmentAdmin.CreateDepartmentAdmin(department.FacultyId, facultyId, departmentId, departmentAdmin);
+        _repository.DepartmentAdmin.CreateDepartmentAdmin(faculty.UniversityId, department.FacultyId, departmentId, departmentAdmin);
         _repository.Save();
 
         return adminToReturn;
     }
 
-    public async Task DeleteAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
+    public async Task DeleteAdminForDepartment(Guid departmentId, Guid id, bool trackChanges)
     {
-        var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
+        var department = _repository.Department.GetDepartmentById(departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
 
@@ -68,9 +70,9 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
         _repository.Save();
     }
 
-    public async Task<IEnumerable<AdminDto>> GetAllAdmins(Guid facultyId, Guid departmentId, bool trackChanges)
+    public async Task<IEnumerable<UserDto>> GetAllAdmins(Guid departmentId, bool trackChanges)
     {
-        var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
+        var department = _repository.Department.GetDepartmentById(departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
 
@@ -83,13 +85,13 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
             users.Add(user);
         }
 
-        var departmentAdminsDto = _mapper.Map<IEnumerable<AdminDto>>(users);
+        var departmentAdminsDto = _mapper.Map<IEnumerable<UserDto>>(users);
         return departmentAdminsDto;
     }
 
-    public async Task<AdminDto> GetDepartmentAdmin(Guid facultyId, Guid departmentId, Guid id, bool trackChanges)
+    public async Task<UserDto> GetDepartmentAdmin(Guid departmentId, Guid id, bool trackChanges)
     {
-        var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
+        var department = _repository.Department.GetDepartmentById(departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
 
@@ -97,13 +99,13 @@ internal sealed class DepartmentAdminService : IDepartmentAdminService
         if (user is null)
             throw new UserNotFoundException(id);
 
-        var adminDto = _mapper.Map<AdminDto>(user);
+        var adminDto = _mapper.Map<UserDto>(user);
         return adminDto;
     }
 
-    public async Task UpdateAdminForDepartment(Guid facultyId, Guid departmentId, Guid id, AdminForUpdateDto admin, bool trackChanges)
+    public async Task UpdateAdminForDepartment(Guid departmentId, Guid id, UserForUpdateDto admin, bool trackChanges)
     {
-        var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
+        var department = _repository.Department.GetDepartmentById(departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
 
