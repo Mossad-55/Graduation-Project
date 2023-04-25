@@ -21,11 +21,15 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new UniversityConfiguration());
         modelBuilder.ApplyConfiguration(new FacultyConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-        // modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-
+        modelBuilder.ApplyConfiguration(new SubjectConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserRolesConfiguration());
+        modelBuilder.ApplyConfiguration(new UniversityAdminConfiguration());
+        modelBuilder.ApplyConfiguration(new FacultyAdminConfiguration());
+        modelBuilder.ApplyConfiguration(new DepartmentAdminConfiguration());
+        modelBuilder.ApplyConfiguration(new ProfessorConfiguration());
+        
     }
 
     // DbSets Here.
