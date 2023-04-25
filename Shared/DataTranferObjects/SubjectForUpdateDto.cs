@@ -1,3 +1,3 @@
 ﻿namespace Shared.DataTranferObjects;
 
-public record SubjectForUpdateDto(string Name, string Code, string Description);
+public record SubjectForUpdateDto(string Name, string Code, string Description, Guid ProfessorId);

@@ -12,8 +12,8 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230406004432_AddedUniversityAdminsTb")]
-    partial class AddedUniversityAdminsTb
+    [Migration("20230425103130_AddedProfessorsTb")]
+    partial class AddedProfessorsTb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,32 @@ namespace GraduationProject_API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Entities.Models.DepartmentAdmin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FacultyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UniveristyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniveristyId");
+
+                    b.ToTable("DepartmentAdmins");
+                });
+
             modelBuilder.Entity("Entities.Models.Faculty", b =>
                 {
                     b.Property<Guid>("Id")
@@ -150,6 +176,56 @@ namespace GraduationProject_API.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Entities.Models.FacultyAdmin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FacultyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UniveristyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniveristyId");
+
+                    b.ToTable("FacultyAdmins");
+                });
+
+            modelBuilder.Entity("Entities.Models.Professor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FacultyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("UniveristyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniveristyId");
+
+                    b.ToTable("Professors");
+                });
+
             modelBuilder.Entity("Entities.Models.Questionnaire", b =>
                 {
                     b.Property<Guid>("Id")
@@ -161,9 +237,6 @@ namespace GraduationProject_API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("SubjectId")
@@ -204,6 +277,9 @@ namespace GraduationProject_API.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
+                    b.Property<Guid>("ProfessorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<double>("Rate")
                         .HasColumnType("float");
 
@@ -211,63 +287,9 @@ namespace GraduationProject_API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Subjects");
+                    b.HasIndex("ProfessorId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("40504bb7-1148-4e05-ba84-2a81ffc3b918"),
-                            Code = "CS311",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Parallel computing is a subject that focuses on the design and implementation of computing systems that are capable of performing multiple tasks simultaneously. This subject is offered in Damanhour University's Faculty of Computer Science and Information Technology, specifically within the Computer Science Department.",
-                            Name = "Parallel Computing",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("5fecd989-af05-4e8f-80a3-ebda42971bb3"),
-                            Code = "CS211",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Introduction to Computer Security is a subject offered by the Computer Science Department at Damanhour University's Faculty of Computer Science and Information Technology. The course provides an overview of the fundamental concepts and principles of computer security, including the protection of computer systems, networks, and data from unauthorized access, theft, damage, and other security threats.",
-                            Name = "Introduction to Computer Security",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("15ee4163-b1d7-4ffd-9357-ae82b0cba7a0"),
-                            Code = "CS381",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Capstone Project II is a course offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an opportunity to apply the knowledge and skills they have acquired throughout their academic program to a real-world problem or project.",
-                            Name = "Capstone Project II",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("17105397-5aa7-452e-bbb5-26a690c56553"),
-                            Code = "CS361",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Intelligent Systems is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the design, development, and application of intelligent systems, which are computer systems that can perceive and respond to their environment, learn from experience, and make decisions based on data analysis and reasoning.",
-                            Name = "Intelligent Systems",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("f9d69186-526f-4141-92e0-8d8b29ee347f"),
-                            Code = "CS212",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Advanced Database is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an in-depth understanding of advanced concepts and techniques used in database management systems.",
-                            Name = "Advanced Database",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("1f80d7c4-3dd1-4365-9420-558e223f0ee6"),
-                            Code = "CS352",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Computer Animation is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the principles and techniques used in the creation and manipulation of digital animations using computer software.",
-                            Name = "Computer Animation",
-                            Rate = 0.0
-                        });
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Entities.Models.University", b =>
@@ -328,9 +350,6 @@ namespace GraduationProject_API.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UniversityId")
                         .HasColumnType("uniqueidentifier");
@@ -411,6 +430,46 @@ namespace GraduationProject_API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "99328045-8ECF-40A1-9F0B-0DEA6398F09A",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1e17883a-0627-4960-953d-65050a12ab71",
+                            Email = "john.doe@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "John",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                            NormalizedUserName = "JOHN.DOE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFM3pxZ+bBL8T+kL4sPysj5IsNDgFaf9kJGqBtX8dKJ7BuPW8NCJAk1VaKkkeXHIAQ==",
+                            PhoneNumber = "01239931230",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a2eaaf23-730a-4915-89a5-4a2ea84d7a50",
+                            TwoFactorEnabled = false,
+                            UserName = "john.doe@example.com"
+                        },
+                        new
+                        {
+                            Id = "69E0E900-6DE2-45E8-85CA-583B32C5C5AA",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "822a4c72-3299-4f2a-8146-6bc67dd179ca",
+                            Email = "jane.doe@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
+                            NormalizedUserName = "JANE.DOE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEmYBZdYPHjfy2ZpO5f7Rvk3k6tmvhXWHwNj7WwT3g74OxcXY9AZqzaEq8Z0yFPyiA==",
+                            PhoneNumber = "01203993009",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4a28c426-7546-4622-93e9-16f38395ad5e",
+                            TwoFactorEnabled = false,
+                            UserName = "jane.doe@example.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -442,36 +501,36 @@ namespace GraduationProject_API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6414b22c-8b53-4ab6-9808-11a084b699f2",
-                            ConcurrencyStamp = "94ac1709-8727-4d02-b72d-60433be609fb",
+                            Id = "BEA713C7-93D2-4F39-8DC8-18F2F3070779",
+                            ConcurrencyStamp = "048284b9-0fff-4fd5-a2a4-fd9c9c3b44a8",
                             Name = "University Admin",
                             NormalizedName = "UNIVERSITY ADMIN"
                         },
                         new
                         {
-                            Id = "18614495-87e8-4efa-870d-0985ad067da7",
-                            ConcurrencyStamp = "2f24418f-ec70-4992-96a3-00be69ee8afc",
+                            Id = "A2523A70-57E3-4B69-A405-F9752517ED62",
+                            ConcurrencyStamp = "9e225b01-cabd-4584-aee6-020ed37e380d",
                             Name = "Faculty Admin",
                             NormalizedName = "FACULTY ADMIN"
                         },
                         new
                         {
-                            Id = "90e81236-c6d4-462e-8ea8-a80fec5422bc",
-                            ConcurrencyStamp = "95e5ff69-f1aa-4107-8a51-1343e8d97bd5",
+                            Id = "64F2143D-B896-4355-90D2-AFD22424B234",
+                            ConcurrencyStamp = "3cabb67c-566c-48e3-93e6-fcd607535b00",
                             Name = "Department Admin",
                             NormalizedName = "DEPARTMENT ADMIN"
                         },
                         new
                         {
-                            Id = "a9b5b8c2-2168-4025-b534-0a8852daf75f",
-                            ConcurrencyStamp = "bb990c34-c803-4315-abf1-276de6664285",
+                            Id = "E5E3E33B-D9F2-4E95-9CEB-26F28A0028E7",
+                            ConcurrencyStamp = "7cedce6b-d70b-4934-921f-3f2e92588e24",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         },
                         new
                         {
-                            Id = "84636786-be1e-4310-98f2-1ba1ef07deeb",
-                            ConcurrencyStamp = "eb5858d0-f9fa-4560-9748-6fc2718fd6d5",
+                            Id = "E26639C4-7023-4878-A497-FC4B12CFA272",
+                            ConcurrencyStamp = "a0978bc5-a1cc-48a8-857c-213d676fb6bd",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -594,6 +653,33 @@ namespace GraduationProject_API.Migrations
                     b.Navigation("Faculty");
                 });
 
+            modelBuilder.Entity("Entities.Models.DepartmentAdmin", b =>
+                {
+                    b.HasOne("Entities.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniveristyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("University");
+                });
+
             modelBuilder.Entity("Entities.Models.Faculty", b =>
                 {
                     b.HasOne("Entities.Models.University", "University")
@@ -601,6 +687,52 @@ namespace GraduationProject_API.Migrations
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("Entities.Models.FacultyAdmin", b =>
+                {
+                    b.HasOne("Entities.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniveristyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("University");
+                });
+
+            modelBuilder.Entity("Entities.Models.Professor", b =>
+                {
+                    b.HasOne("Entities.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniveristyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Faculty");
 
                     b.Navigation("University");
                 });
@@ -624,7 +756,15 @@ namespace GraduationProject_API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Entities.Models.Professor", "Professor")
+                        .WithMany("Subjects")
+                        .HasForeignKey("ProfessorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
+
+                    b.Navigation("Professor");
                 });
 
             modelBuilder.Entity("Entities.Models.UniversityAdmin", b =>
@@ -692,6 +832,11 @@ namespace GraduationProject_API.Migrations
             modelBuilder.Entity("Entities.Models.Faculty", b =>
                 {
                     b.Navigation("Departments");
+                });
+
+            modelBuilder.Entity("Entities.Models.Professor", b =>
+                {
+                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("Entities.Models.University", b =>

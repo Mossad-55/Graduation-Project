@@ -4,7 +4,7 @@
 
 namespace GraduationProject_API.Migrations
 {
-    public partial class AddedRolesToDb : Migration
+    public partial class AddedRolesWithInitialData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace GraduationProject_API.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3d1d9040-651a-47b6-ad50-ca12c76fb0d4", "8b734f46-b971-45f6-a5ae-5c40d3994e9e", "Department Admin", "DEPARTMENT ADMIN" },
-                    { "788f3586-104c-4326-9081-2bafef400f49", "010eb6f7-e792-4de2-9df5-d92dd12717d5", "University Admin", "UNIVERSITY ADMIN" },
-                    { "a41eedb6-c56a-4e8a-b5f6-8548d1a6e1d7", "8e74685f-5be2-4596-a66c-ff2f0ba94e03", "Student", "STUDENT" },
-                    { "ad5a75af-5a06-4a25-8230-ac73aaac718d", "10309ed5-05a0-4d2b-b5fd-4fd16a5d013b", "Professor", "PROFESSOR" },
-                    { "cfa67886-9d46-451d-9fc3-889c85e73f77", "69fc9a86-f959-4d79-9642-5c365919a720", "Faculty Admin", "FACULTY ADMIN" }
+                    { "64F2143D-B896-4355-90D2-AFD22424B234", "4829917c-596c-4d57-a7fc-ad6f635d8628", "Department Admin", "DEPARTMENT ADMIN" },
+                    { "A2523A70-57E3-4B69-A405-F9752517ED62", "93adb965-dfdc-407b-ae45-2fea65598926", "Faculty Admin", "FACULTY ADMIN" },
+                    { "BEA713C7-93D2-4F39-8DC8-18F2F3070779", "3a4263a0-d6e6-4e75-8d1e-faf89141c362", "University Admin", "UNIVERSITY ADMIN" },
+                    { "E26639C4-7023-4878-A497-FC4B12CFA272", "7339b32c-d293-4d0e-8c34-baf4f78f845d", "Student", "STUDENT" },
+                    { "E5E3E33B-D9F2-4E95-9CEB-26F28A0028E7", "00eac70a-b410-42cb-91ac-1fc07372dc3b", "Professor", "PROFESSOR" }
                 });
         }
 
@@ -26,27 +26,27 @@ namespace GraduationProject_API.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "3d1d9040-651a-47b6-ad50-ca12c76fb0d4");
+                keyValue: "64F2143D-B896-4355-90D2-AFD22424B234");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "788f3586-104c-4326-9081-2bafef400f49");
+                keyValue: "A2523A70-57E3-4B69-A405-F9752517ED62");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "a41eedb6-c56a-4e8a-b5f6-8548d1a6e1d7");
+                keyValue: "BEA713C7-93D2-4F39-8DC8-18F2F3070779");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ad5a75af-5a06-4a25-8230-ac73aaac718d");
+                keyValue: "E26639C4-7023-4878-A497-FC4B12CFA272");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "cfa67886-9d46-451d-9fc3-889c85e73f77");
+                keyValue: "E5E3E33B-D9F2-4E95-9CEB-26F28A0028E7");
         }
     }
 }

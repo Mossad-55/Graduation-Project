@@ -12,8 +12,8 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230417230851_EditedFacultyAdminsTb")]
-    partial class EditedFacultyAdminsTb
+    [Migration("20230425102906_AddedDepartmentAdminsTb")]
+    partial class AddedDepartmentAdminsTb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,6 +85,32 @@ namespace GraduationProject_API.Migrations
                             Name = "Multimedia",
                             Rate = 0.0
                         });
+                });
+
+            modelBuilder.Entity("Entities.Models.DepartmentAdmin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FacultyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UniveristyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UniveristyId");
+
+                    b.ToTable("DepartmentAdmins");
                 });
 
             modelBuilder.Entity("Entities.Models.Faculty", b =>
@@ -182,9 +208,6 @@ namespace GraduationProject_API.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("SubjectId")
@@ -429,6 +452,46 @@ namespace GraduationProject_API.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "99328045-8ECF-40A1-9F0B-0DEA6398F09A",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "e6c85e30-4c8b-445d-9d67-772cf05a8885",
+                            Email = "john.doe@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "John",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                            NormalizedUserName = "JOHN.DOE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIGSho/Ae5ByR4CjaJ+F+TJM2nTEYzDyxt0PkzKMdojtf7emVUE714PxS3bebGqFvA==",
+                            PhoneNumber = "01239931230",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "d4959f7f-7449-40be-9558-b530807c3bf1",
+                            TwoFactorEnabled = false,
+                            UserName = "john.doe@example.com"
+                        },
+                        new
+                        {
+                            Id = "69E0E900-6DE2-45E8-85CA-583B32C5C5AA",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "775b7259-f088-4b62-9d92-eb47801aa0e6",
+                            Email = "jane.doe@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Jane",
+                            LastName = "Doe",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
+                            NormalizedUserName = "JANE.DOE@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ8kCswB45oXkGplbo4UQSVeQOkP7tckykIx/hfHq+rf7hd+PAtXP1qXYoT2NnKPQg==",
+                            PhoneNumber = "01203993009",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "26db48b2-0f68-4282-9d32-dbd362cb6276",
+                            TwoFactorEnabled = false,
+                            UserName = "jane.doe@example.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -460,36 +523,36 @@ namespace GraduationProject_API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bda0c218-5cce-4b25-8a7c-842bc798dba8",
-                            ConcurrencyStamp = "080edc6c-7eba-4996-bb95-7122df5f987f",
+                            Id = "BEA713C7-93D2-4F39-8DC8-18F2F3070779",
+                            ConcurrencyStamp = "8fd75486-fde9-42db-b7a6-c75c6b11777e",
                             Name = "University Admin",
                             NormalizedName = "UNIVERSITY ADMIN"
                         },
                         new
                         {
-                            Id = "754176ea-e0f2-4c3a-9bc2-45d2e2da0a8a",
-                            ConcurrencyStamp = "c45fde80-68a9-41ba-addc-fc0d84bbc27c",
+                            Id = "A2523A70-57E3-4B69-A405-F9752517ED62",
+                            ConcurrencyStamp = "ca684568-bb15-48f9-a151-b249a410933f",
                             Name = "Faculty Admin",
                             NormalizedName = "FACULTY ADMIN"
                         },
                         new
                         {
-                            Id = "abdb99d5-e073-4dfb-9802-3a475f3041e8",
-                            ConcurrencyStamp = "8a1918da-d6a4-4301-8e77-740e83fd04ca",
+                            Id = "64F2143D-B896-4355-90D2-AFD22424B234",
+                            ConcurrencyStamp = "50e6500f-9a4f-49b0-9c30-c24d163fdf22",
                             Name = "Department Admin",
                             NormalizedName = "DEPARTMENT ADMIN"
                         },
                         new
                         {
-                            Id = "5d3e5560-99a9-4e1e-850c-871d6c3aafcb",
-                            ConcurrencyStamp = "f0cfd533-602a-4c11-bea4-3dba3c78f860",
+                            Id = "E5E3E33B-D9F2-4E95-9CEB-26F28A0028E7",
+                            ConcurrencyStamp = "899cc57e-d55f-470b-ad09-f907bbbde81e",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         },
                         new
                         {
-                            Id = "513c3d9b-d23b-4929-9b7a-5ff1c2ee34d9",
-                            ConcurrencyStamp = "18293d20-ec7c-4aca-970e-f75cfe8ff8b2",
+                            Id = "E26639C4-7023-4878-A497-FC4B12CFA272",
+                            ConcurrencyStamp = "41dca87f-a647-4935-bdd5-f2f40a5cbc9f",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
@@ -610,6 +673,33 @@ namespace GraduationProject_API.Migrations
                         .IsRequired();
 
                     b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Entities.Models.DepartmentAdmin", b =>
+                {
+                    b.HasOne("Entities.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Models.University", "University")
+                        .WithMany()
+                        .HasForeignKey("UniveristyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("Entities.Models.Faculty", b =>

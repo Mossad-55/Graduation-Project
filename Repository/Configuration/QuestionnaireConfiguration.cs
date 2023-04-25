@@ -16,7 +16,6 @@ public class QuestionnaireConfiguration : IEntityTypeConfiguration<Questionnaire
                 Title = "Week 1 Questionnaire",
                 CreatedAt = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(6),
-                LastUpdatedAt= DateTime.Now.AddDays(1),
                 SubjectId = new Guid("")
             }
         );

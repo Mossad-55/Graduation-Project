@@ -12,8 +12,8 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230404010256_CreatingIdentityTables")]
-    partial class CreatingIdentityTables
+    [Migration("20230425101649_AddedUniversitiesTb")]
+    partial class AddedUniversitiesTb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,41 +50,7 @@ namespace GraduationProject_API.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Departments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "The Computer Science Department at Damanhour University is a vibrant academic community dedicated to advancing knowledge and technology in the field of computer science. The department offers a range of undergraduate and graduate programs that provide students with a solid foundation in computer science theory and practical skills.",
-                            FacultyId = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
-                            Name = "Computer Science",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("794da9eb-b65e-45ba-a9dd-caa9a22c7d40"),
-                            Description = "The Information Technology (IT) Department at Damanhour University is a dynamic and innovative academic community dedicated to advancing the field of information technology through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a comprehensive understanding of the theory and practice of IT.",
-                            FacultyId = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
-                            Name = "Information Technology",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("72b983a8-6386-498d-a114-0e241e7eeae0"),
-                            Description = "The Information Systems (IS) Department at Damanhour University is a forward-thinking and innovative academic community dedicated to advancing the field of information systems through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a comprehensive understanding of the theory and practice of information systems.",
-                            FacultyId = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
-                            Name = "Information System",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("c65f6c7f-32f7-4797-a85b-92c9ba20ecb1"),
-                            Description = "The Multimedia Department at Damanhour University is a dynamic and creative academic community dedicated to advancing the field of multimedia through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a solid foundation in multimedia theory and practical skills.",
-                            FacultyId = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
-                            Name = "Multimedia",
-                            Rate = 0.0
-                        });
+                    b.ToTable("Department");
                 });
 
             modelBuilder.Entity("Entities.Models.Faculty", b =>
@@ -113,161 +79,7 @@ namespace GraduationProject_API.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d0552b49-6e7d-4ced-8a30-62ce8066a2d4"),
-                            Description = "We believe that software and information technology is the future, hence we have recruited our knowledge in the fields of information system and automation.",
-                            Name = "Faculty Of Computer Science and Information Technology",
-                            Rate = 0.0,
-                            UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("2694c80b-f092-4975-9688-5565cf1e67fc"),
-                            Description = "The Faculty of Science at Damanhour University is a renowned academic institution located in the city of Damanhour, Egypt. The faculty is dedicated to providing students with a comprehensive education in the field of science, preparing them for successful careers in research, academia, and industry.",
-                            Name = "Faculty Of Science",
-                            Rate = 0.0,
-                            UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("0f3b208b-2006-4c07-878f-27e4dd1cc99e"),
-                            Description = "The Faculty of Engineering at Damanhour University is a prestigious academic institution located in the city of Damanhour, Egypt. The faculty is dedicated to providing students with a comprehensive education in the field of engineering, preparing them for successful careers in research, academia, and industry.",
-                            Name = "Faculty Of Engineering",
-                            Rate = 0.0,
-                            UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
-                        },
-                        new
-                        {
-                            Id = new Guid("fafbc1d0-d161-4f1e-9ef6-f7cfd23d97f5"),
-                            Description = "The Faculty of Commerce at Damanhour University is a leading academic institution located in the city of Damanhour, Egypt. The faculty is committed to providing high-quality education and training to students in the field of commerce and business.",
-                            Name = "Faculty Of Commerce",
-                            Rate = 0.0,
-                            UniversityId = new Guid("86f697d4-a762-44d6-8322-2c08c66f94e4")
-                        });
-                });
-
-            modelBuilder.Entity("Entities.Models.Questionnaire", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("QuestionnaireId");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Questionnaires");
-                });
-
-            modelBuilder.Entity("Entities.Models.Subject", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("SubjectId");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("Subjects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("40504bb7-1148-4e05-ba84-2a81ffc3b918"),
-                            Code = "CS311",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Parallel computing is a subject that focuses on the design and implementation of computing systems that are capable of performing multiple tasks simultaneously. This subject is offered in Damanhour University's Faculty of Computer Science and Information Technology, specifically within the Computer Science Department.",
-                            Name = "Parallel Computing",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("5fecd989-af05-4e8f-80a3-ebda42971bb3"),
-                            Code = "CS211",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Introduction to Computer Security is a subject offered by the Computer Science Department at Damanhour University's Faculty of Computer Science and Information Technology. The course provides an overview of the fundamental concepts and principles of computer security, including the protection of computer systems, networks, and data from unauthorized access, theft, damage, and other security threats.",
-                            Name = "Introduction to Computer Security",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("15ee4163-b1d7-4ffd-9357-ae82b0cba7a0"),
-                            Code = "CS381",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Capstone Project II is a course offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an opportunity to apply the knowledge and skills they have acquired throughout their academic program to a real-world problem or project.",
-                            Name = "Capstone Project II",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("17105397-5aa7-452e-bbb5-26a690c56553"),
-                            Code = "CS361",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Intelligent Systems is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the design, development, and application of intelligent systems, which are computer systems that can perceive and respond to their environment, learn from experience, and make decisions based on data analysis and reasoning.",
-                            Name = "Intelligent Systems",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("f9d69186-526f-4141-92e0-8d8b29ee347f"),
-                            Code = "CS212",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Advanced Database is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an in-depth understanding of advanced concepts and techniques used in database management systems.",
-                            Name = "Advanced Database",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("1f80d7c4-3dd1-4365-9420-558e223f0ee6"),
-                            Code = "CS352",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Computer Animation is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the principles and techniques used in the creation and manipulation of digital animations using computer software.",
-                            Name = "Computer Animation",
-                            Rate = 0.0
-                        });
+                    b.ToTable("Faculty");
                 });
 
             modelBuilder.Entity("Entities.Models.University", b =>
@@ -547,28 +359,6 @@ namespace GraduationProject_API.Migrations
                         .IsRequired();
 
                     b.Navigation("University");
-                });
-
-            modelBuilder.Entity("Entities.Models.Questionnaire", b =>
-                {
-                    b.HasOne("Entities.Models.Subject", "Subject")
-                        .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("Entities.Models.Subject", b =>
-                {
-                    b.HasOne("Entities.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

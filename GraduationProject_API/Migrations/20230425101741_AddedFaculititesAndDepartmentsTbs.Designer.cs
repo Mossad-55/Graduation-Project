@@ -12,8 +12,8 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230417230641_EditedUniversityAndFacultyAdminsTbs")]
-    partial class EditedUniversityAndFacultyAdminsTbs
+    [Migration("20230425101741_AddedFaculititesAndDepartmentsTbs")]
+    partial class AddedFaculititesAndDepartmentsTbs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -150,142 +150,6 @@ namespace GraduationProject_API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entities.Models.FacultyAdmin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FacultyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
-
-                    b.ToTable("FacultyAdmins");
-                });
-
-            modelBuilder.Entity("Entities.Models.Questionnaire", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("QuestionnaireId");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("Questionnaires");
-                });
-
-            modelBuilder.Entity("Entities.Models.Subject", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("SubjectId");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("Subjects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("40504bb7-1148-4e05-ba84-2a81ffc3b918"),
-                            Code = "CS311",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Parallel computing is a subject that focuses on the design and implementation of computing systems that are capable of performing multiple tasks simultaneously. This subject is offered in Damanhour University's Faculty of Computer Science and Information Technology, specifically within the Computer Science Department.",
-                            Name = "Parallel Computing",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("5fecd989-af05-4e8f-80a3-ebda42971bb3"),
-                            Code = "CS211",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Introduction to Computer Security is a subject offered by the Computer Science Department at Damanhour University's Faculty of Computer Science and Information Technology. The course provides an overview of the fundamental concepts and principles of computer security, including the protection of computer systems, networks, and data from unauthorized access, theft, damage, and other security threats.",
-                            Name = "Introduction to Computer Security",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("15ee4163-b1d7-4ffd-9357-ae82b0cba7a0"),
-                            Code = "CS381",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Capstone Project II is a course offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an opportunity to apply the knowledge and skills they have acquired throughout their academic program to a real-world problem or project.",
-                            Name = "Capstone Project II",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("17105397-5aa7-452e-bbb5-26a690c56553"),
-                            Code = "CS361",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Intelligent Systems is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the design, development, and application of intelligent systems, which are computer systems that can perceive and respond to their environment, learn from experience, and make decisions based on data analysis and reasoning.",
-                            Name = "Intelligent Systems",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("f9d69186-526f-4141-92e0-8d8b29ee347f"),
-                            Code = "CS212",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Advanced Database is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course is designed to provide students with an in-depth understanding of advanced concepts and techniques used in database management systems.",
-                            Name = "Advanced Database",
-                            Rate = 0.0
-                        },
-                        new
-                        {
-                            Id = new Guid("1f80d7c4-3dd1-4365-9420-558e223f0ee6"),
-                            Code = "CS352",
-                            DepartmentId = new Guid("84796c48-d538-4954-a98a-622dc5c9325a"),
-                            Description = "Computer Animation is a subject offered in the Computer Science Department of Damanhour University's Faculty of Computer Science and Information Technology. This course focuses on the principles and techniques used in the creation and manipulation of digital animations using computer software.",
-                            Name = "Computer Animation",
-                            Rate = 0.0
-                        });
-                });
-
             modelBuilder.Entity("Entities.Models.University", b =>
                 {
                     b.Property<Guid>("Id")
@@ -337,22 +201,6 @@ namespace GraduationProject_API.Migrations
                             Name = "Tanta University",
                             Rate = 0.0
                         });
-                });
-
-            modelBuilder.Entity("Entities.Models.UniversityAdmin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UniversityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UniversityId");
-
-                    b.ToTable("UniversityAdmins");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -451,43 +299,6 @@ namespace GraduationProject_API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "a82c50d1-615e-4943-97b7-9daad4022628",
-                            ConcurrencyStamp = "03944695-5ee6-44df-a212-ab99878affdc",
-                            Name = "University Admin",
-                            NormalizedName = "UNIVERSITY ADMIN"
-                        },
-                        new
-                        {
-                            Id = "6d7998ce-f9ce-408a-99ab-6f8e48bd44b0",
-                            ConcurrencyStamp = "85be79d3-1932-4ea3-90a4-247ac26d719e",
-                            Name = "Faculty Admin",
-                            NormalizedName = "FACULTY ADMIN"
-                        },
-                        new
-                        {
-                            Id = "2203cce6-d616-40e4-a75b-24e3aeb03f33",
-                            ConcurrencyStamp = "056b8d31-68b0-49bb-9831-fc5f5e34e961",
-                            Name = "Department Admin",
-                            NormalizedName = "DEPARTMENT ADMIN"
-                        },
-                        new
-                        {
-                            Id = "fe595817-f883-491d-8413-d676d8ab489f",
-                            ConcurrencyStamp = "2f288d02-3ae6-430b-a2ac-df7578619b95",
-                            Name = "Professor",
-                            NormalizedName = "PROFESSOR"
-                        },
-                        new
-                        {
-                            Id = "d9a63c8d-7e8f-4a5b-93a6-f5a292a381fd",
-                            ConcurrencyStamp = "e2ac14c7-ef51-4f47-b62e-6366e1d5a60d",
-                            Name = "Student",
-                            NormalizedName = "STUDENT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -611,50 +422,6 @@ namespace GraduationProject_API.Migrations
                 {
                     b.HasOne("Entities.Models.University", "University")
                         .WithMany("Faculties")
-                        .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("University");
-                });
-
-            modelBuilder.Entity("Entities.Models.FacultyAdmin", b =>
-                {
-                    b.HasOne("Entities.Models.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Faculty");
-                });
-
-            modelBuilder.Entity("Entities.Models.Questionnaire", b =>
-                {
-                    b.HasOne("Entities.Models.Subject", "Subject")
-                        .WithMany()
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
-                });
-
-            modelBuilder.Entity("Entities.Models.Subject", b =>
-                {
-                    b.HasOne("Entities.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("Entities.Models.UniversityAdmin", b =>
-                {
-                    b.HasOne("Entities.Models.University", "University")
-                        .WithMany()
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

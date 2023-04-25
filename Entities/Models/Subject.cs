@@ -22,5 +22,7 @@ public class Subject
     public Guid DepartmentId { get; set; }
     public Department? Department { get; set; }
 
-    public ICollection<Professor>? Professors { get; set; }
+    [ForeignKey(nameof(Professor))]
+    public Guid ProfessorId { get; set; }
+    public Professor? Professor { get; set; }
 }

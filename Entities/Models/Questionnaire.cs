@@ -15,8 +15,6 @@ public class Questionnaire
     public DateTime CreatedAt { get; set; }
     [Required]
     public DateTime EndDate { get; set;}
-    [Required]
-    public DateTime LastUpdatedAt { get; set; }
 
     [ForeignKey(nameof(Subject))]
     public Guid SubjectId { get; set; }

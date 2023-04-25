@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GraduationProject_API.Migrations
 {
-    public partial class AddedSubjectsTbWithInitialData : Migration
+    public partial class AddedSubjectsAndQuestionnairesTbs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,6 +31,27 @@ namespace GraduationProject_API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Questionnaires",
+                columns: table => new
+                {
+                    QuestionnaireId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SubjectId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questionnaires", x => x.QuestionnaireId);
+                    table.ForeignKey(
+                        name: "FK_Questionnaires_Subjects_SubjectId",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "SubjectId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Subjects",
                 columns: new[] { "SubjectId", "Code", "DepartmentId", "Description", "Name", "Rate" },
@@ -45,6 +66,11 @@ namespace GraduationProject_API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Questionnaires_SubjectId",
+                table: "Questionnaires",
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Subjects_DepartmentId",
                 table: "Subjects",
                 column: "DepartmentId");
@@ -52,6 +78,9 @@ namespace GraduationProject_API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Questionnaires");
+
             migrationBuilder.DropTable(
                 name: "Subjects");
         }
