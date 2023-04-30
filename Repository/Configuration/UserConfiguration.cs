@@ -70,6 +70,52 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 FirstName = "Sara",
                 LastName = "Jones",
                 PhoneNumber = "010765432231"
+            },
+            new User
+            {
+                Id = "706870e9-e373-11ed-b719-105badc84798",
+                UserName = "Mo.Zi@example.com",
+                NormalizedUserName = "MO.ZI@EXAMPLE.COM",
+                Email = "Mo.Zi@example.com",
+                NormalizedEmail = "MO.ZI@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "Mossad5522!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                FirstName = "Mo",
+                LastName = "Zi",
+                PhoneNumber = "01279426209"
+            },
+            new User
+            {
+                Id = "706b3236-e373-11ed-a003-105badc84798",
+                UserName = "Majdi.Fares@example.com",
+                NormalizedUserName = "MAJDI.FARES@EXAMPLE.COM",
+                Email = "Majdi.Fares@example.com",
+                NormalizedEmail = "MAJDI.FARES@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "Mossad5522!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                FirstName = "Majdi",
+                LastName = "Fares",
+                PhoneNumber = "01270867190"
+            },
+
+            new User
+            {
+                Id = "706b3237-e373-11ed-988f-105badc84798",
+                UserName = "Hamza.Yisri@example.com",
+                NormalizedUserName = "HAMZA.YISRI@EXAMPLE.COM",
+                Email = "Hamza.Yisri@example.com",
+                NormalizedEmail = "HAMZA.YISRI@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<User>().HashPassword(null, "Mossad5522!"),
+                SecurityStamp = Guid.NewGuid().ToString(),
+                ConcurrencyStamp = Guid.NewGuid().ToString(),
+                FirstName = "Hamza",
+                LastName = "Yisri",
+                PhoneNumber = "01256543256"
             }
         );
     }

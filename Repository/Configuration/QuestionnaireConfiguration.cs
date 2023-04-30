@@ -17,6 +17,14 @@ public class QuestionnaireConfiguration : IEntityTypeConfiguration<Questionnaire
                 CreatedAt = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(6),
                 SubjectId = new Guid("")
+            },
+            new Questionnaire
+            {
+                Id = new Guid(),
+                Title = "",
+                CreatedAt = new DateTime(2002, 11, 4),
+                EndDate = new DateTime(),
+                SubjectId = new Guid("")
             }
         );
     }
