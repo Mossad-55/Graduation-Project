@@ -61,5 +61,6 @@ public class MappingProfile : Profile
         CreateMap<User, ProfessorDto>()
             .ForMember(p => p.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
+        CreateMap<ProfessorDto, Professor>();
     }
 }

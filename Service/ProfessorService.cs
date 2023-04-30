@@ -27,9 +27,14 @@ internal sealed class ProfessorService : IProfessorService
 
     public async Task<ProfessorDto> CreateProfessor(Guid facultyId, Guid departmentId, UserForCreationDto professor, bool trackChanges)
     {
+        var faculty = _repository.Faculty.GetFacultyById(facultyId, trackChanges);
+        if (faculty is null)
+            throw new FacultyNotFoundException(facultyId);
+
         var department = _repository.Department.GetDepartment(facultyId, departmentId, trackChanges);
         if (department is null)
             throw new DepartmentNotFoundException(departmentId);
+
 
         if (await _userManager.FindByEmailAsync(professor.Email) is not null)
             throw new EmailFoundException(professor.Email);
@@ -44,7 +49,7 @@ internal sealed class ProfessorService : IProfessorService
 
         var professorEntity = _mapper.Map<Professor>(professorToReturn);
 
-        _repository.Professor.CreateProfessor(department.FacultyId, facultyId, departmentId, professorEntity);
+        _repository.Professor.CreateProfessor(faculty.UniversityId, facultyId, departmentId, professorEntity);
         _repository.Save();
 
         return professorToReturn;
