@@ -14,6 +14,7 @@ public sealed class RepositoryManager : IRepositoryManager
     private readonly Lazy<IFacultyAdminRepository> _facultyAdminRepository;
     private readonly Lazy<IDepartmentAdminRepository> _departmentAdminRepository;
     private readonly Lazy<IProfessorRepository> _professorRepository;
+    private readonly Lazy<IStudentRepository> _studentRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -27,6 +28,7 @@ public sealed class RepositoryManager : IRepositoryManager
         _facultyAdminRepository = new Lazy<IFacultyAdminRepository>(() => new FacultyAdminRepository(repositoryContext));
         _departmentAdminRepository = new Lazy<IDepartmentAdminRepository>(() => new DepartmentAdminRepository(repositoryContext));
         _professorRepository = new Lazy<IProfessorRepository>(() => new ProfessorRepository(repositoryContext));
+        _studentRepository = new Lazy<IStudentRepository>(() => new StudentRepository(repositoryContext));
     }
 
     public IUniversityRepository University => _universityRepository.Value;
@@ -35,9 +37,10 @@ public sealed class RepositoryManager : IRepositoryManager
     public ISubjectRepository Subject => _subjectRepository.Value;
     public IQuestionnaireRepository Questionnaire => _questionnaireRepository.Value;
     public IUniversityAdminRepository UniversityAdmin => _universityAdminRepository.Value;
-    public IFacultyAdminRepository FacultyAdmin =>  _facultyAdminRepository.Value;
-    public IDepartmentAdminRepository DepartmentAdmin =>  _departmentAdminRepository.Value;
-    public IProfessorRepository Professor =>  _professorRepository.Value;
+    public IFacultyAdminRepository FacultyAdmin => _facultyAdminRepository.Value;
+    public IDepartmentAdminRepository DepartmentAdmin => _departmentAdminRepository.Value;
+    public IProfessorRepository Professor => _professorRepository.Value;
+    public IStudentRepository Student => _studentRepository.Value;
 
 
     public void Save() => _repositoryContext.SaveChanges();

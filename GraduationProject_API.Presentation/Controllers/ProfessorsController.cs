@@ -39,7 +39,7 @@ public class ProfessorsController : ControllerBase
     [HttpGet("professors/{id:Guid}", Name = "GetProfessor")]
     public async Task<IActionResult> GetAProfessorById(Guid id)
     {
-        var professor = await _service.ProfessorService.GetProfessor(id, false);
+        var professor = await _service.ProfessorService.GetProfessorWithSubjects(id, false);
 
         return Ok(professor);
     }

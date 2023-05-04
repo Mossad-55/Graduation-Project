@@ -75,6 +75,17 @@ internal sealed class QuestionnaireService : IQuestionnaireService
         return questionnaireDto;
     }
 
+    public QuestionnaireDto GetQuestionnaireById(Guid id, bool trackChanges)
+    {
+        var questionnaire = _repository.Questionnaire.GetQuestionnaireById(id, trackChanges);
+        if (questionnaire is null)
+            throw new QuestionnaireNotFoundException(id);
+
+        var questionnaireDto = _mapper.Map<QuestionnaireDto>(questionnaire);
+
+        return questionnaireDto;
+    }
+
     public void UpdateQuestionnaireForSubject(Guid departmentId, Guid subjectId, Guid id, QuestionnaireForUpdateDto questionnaire, bool otherTrackChanges, bool quesTrackChanges)
     {
         var subject = _repository.Subject.GetSubject(departmentId, subjectId, otherTrackChanges);

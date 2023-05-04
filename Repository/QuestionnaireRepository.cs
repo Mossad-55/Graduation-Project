@@ -25,4 +25,8 @@ internal sealed class QuestionnaireRepository : RepositoryBase<Questionnaire>, I
     public Questionnaire GetQuestionnaire(Guid subjectId, Guid id, bool trackChanges) =>
         FindByCondition(q => q.SubjectId == subjectId && q.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public Questionnaire GetQuestionnaireById(Guid id, bool trackChanges) =>
+        FindByCondition(q => q.Id == id, trackChanges)
+        .FirstOrDefault();
 }

@@ -6,5 +6,6 @@ public class ProfessorDto
     public string FullName { get; init; }
     public string Email { get; init; }
     public string PhoneNumber { get; init; }
-    public double Rate { get; init; }
+    public double Rate { get; set; }
+    public ICollection<SubjectForProfessorDto>? Subjects { get; set; }
 }

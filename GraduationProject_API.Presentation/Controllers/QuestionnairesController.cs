@@ -5,14 +5,22 @@ using Shared.DataTranferObjects;
 namespace GraduationProject_API.Presentation.Controllers;
 
 [ApiController]
-[Route("api/departments/{departmentId}/subjects/{subjectId}/questionnaires")]
+[Route("api")]
 public class QuestionnairesController : ControllerBase
 {
     private readonly IServiceManager _service;
 
     public QuestionnairesController(IServiceManager service) => _service = service;
 
-    [HttpGet]
+    [HttpGet("questionnaires/{id:Guid}")]
+    public IActionResult GetQuestionnaireById(Guid id)
+    {
+        var questionnaire = _service.QuestionnaireService.GetQuestionnaireById(id, false);
+
+        return Ok(questionnaire);
+    }
+
+    [HttpGet("departments/{departmentId}/subjects/{subjectId}/questionnaires")]
     public IActionResult GetQuestionnairesForSubject(Guid departmentId, Guid subjectId)
     {
         var questionnaires = _service.QuestionnaireService.GetAllQuestionnaires(departmentId, subjectId, false);
@@ -20,7 +28,7 @@ public class QuestionnairesController : ControllerBase
         return Ok(questionnaires);
     }
 
-    [HttpGet("{id:Guid}", Name = "GetQuestionnaireForSubject")]
+    [HttpGet("/departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}", Name = "GetQuestionnaireForSubject")]
     public IActionResult GetQuestionnaire(Guid departmentId, Guid subjectId, Guid id)
     {
         var questionnaire = _service.QuestionnaireService.GetQuestionnaire(departmentId, subjectId, id, false);
@@ -28,7 +36,7 @@ public class QuestionnairesController : ControllerBase
         return Ok(questionnaire);
     }
 
-    [HttpPost]
+    [HttpPost("departments/{departmentId}/subjects/{subjectId}/questionnaires")]
     public IActionResult CreateQuestionnaire(Guid departmentId, Guid subjectId, [FromBody] QuestionnaireForCreationDto questionnaire)
     {
         if (questionnaire is null)
@@ -39,7 +47,7 @@ public class QuestionnairesController : ControllerBase
         return CreatedAtRoute("GetQuestionnaireForSubject", new { departmentId, subjectId, id = questionnaireToReturn.Id }, questionnaireToReturn);
     }
 
-    [HttpDelete("{id:Guid}")]
+    [HttpDelete("departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}")]
     public IActionResult DeleteQuestionnaire(Guid departmentId, Guid subjectId, Guid id)
     {
         _service.QuestionnaireService.DeleteQuestionnaireForSubject(departmentId, subjectId, id, false);
@@ -47,7 +55,7 @@ public class QuestionnairesController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id:Guid}")]
+    [HttpPut("departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}")]
     public IActionResult UpdateQuestionnaire(Guid departmentId, Guid subjectId, Guid id, 
         [FromBody]QuestionnaireForUpdateDto questionnaire)
     {

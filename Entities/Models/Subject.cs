@@ -25,4 +25,7 @@ public class Subject
     [ForeignKey(nameof(Professor))]
     public Guid ProfessorId { get; set; }
     public Professor? Professor { get; set; }
+
+    public ICollection<Student>? Students { get; set; }
+    public ICollection<Questionnaire>? Questionnaires { get; set; }
 }
