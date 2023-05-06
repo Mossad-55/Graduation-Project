@@ -13,4 +13,5 @@ public interface IServiceManager
     IDepartmentAdminService DepartmentAdminService { get; }
     IProfessorService ProfessorService { get; }
     IStudentService StudentService { get; }
+    ISubmitionService SubmitionService { get; }
 }
