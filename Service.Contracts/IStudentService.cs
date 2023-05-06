@@ -6,4 +6,6 @@ namespace Service.Contracts;
 public interface IStudentService
 {
     Task<StudentDto> GetStudentWithSubjects(Guid id, bool trackChanges);
+    Task<ICollection<SubjectDtoForStudent>> GetStudentSubjectsWithQuestionnaires(Guid id, bool trackChanges);
 }
+

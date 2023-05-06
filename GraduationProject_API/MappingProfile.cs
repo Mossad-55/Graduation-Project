@@ -31,6 +31,13 @@ public class MappingProfile : Profile
         CreateMap<Subject, SubjectForProfessorDto>()
             .ForMember(s => s.FullName,
             opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
+        CreateMap<Subject, SubjectDetailsForStudentDto>()
+            .ForMember(s => s.FullName,
+            opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
+        CreateMap<Subject, SubjectDtoForStudent>()
+            .ForMember(s => s.FullName,
+            opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
+
         CreateMap<SubjectForCreationDto, Subject>();
         CreateMap<SubjectForUpdateDto, Subject>();
 
@@ -41,7 +48,6 @@ public class MappingProfile : Profile
             opts => opts.MapFrom(x => (x.EndDate - x.CreatedAt).Days))
             .ForMember(q => q.IsActive,
             opts => opts.MapFrom(x => x.EndDate > DateTime.Now));
-
         CreateMap<QuestionnaireForCreationDto, Questionnaire>();
         CreateMap<QuestionnaireForUpdateDto, Questionnaire>();
 

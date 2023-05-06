@@ -18,4 +18,12 @@ public class StudentsController : ControllerBase
 
         return Ok(student);
     }
+
+    [HttpGet("{id:Guid}/subjects")]
+    public async Task<IActionResult> GetStudentSubjectsAndQestionnaire(Guid id)
+    {
+        var subjects = await _service.StudentService.GetStudentSubjectsWithQuestionnaires(id, false);
+
+        return Ok(subjects);
+    }
 }

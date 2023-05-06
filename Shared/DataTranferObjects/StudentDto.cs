@@ -6,5 +6,5 @@ public class StudentDto
     public string FullName { get; init; }
     public string Email { get; init; }
     public string PhoneNumber { get; init; } 
-    public ICollection<SubjectDto>? Subjects { get; set; }
+    public ICollection<SubjectDetailsForStudentDto>? Subjects { get; set; }
 }

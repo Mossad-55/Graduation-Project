@@ -17,6 +17,10 @@ internal sealed class QuestionnaireRepository : RepositoryBase<Questionnaire>, I
 
     public void DeleteQuestionnaire(Questionnaire questionnaire) => Delete(questionnaire);
 
+    public Questionnaire GetActiveQuestionnaireForSubject(Guid subjectId, bool trackChanges) =>
+        FindByCondition(q => q.SubjectId == subjectId && q.EndDate > DateTime.Now, trackChanges)
+        .FirstOrDefault();
+
     public IEnumerable<Questionnaire> GetAllQuestionnaires(Guid subjectId, bool trackChanges) =>
         FindByCondition(q => q.SubjectId == subjectId, trackChanges)
         .OrderBy(q => q.CreatedAt)
