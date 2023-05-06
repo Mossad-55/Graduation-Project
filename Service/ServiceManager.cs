@@ -33,7 +33,7 @@ public sealed class ServiceManager : IServiceManager
 		_departmentAdminService = new Lazy<IDepartmentAdminService>(() => new DepartmentAdminService(repositoryManager, logger, mapper, userManager));
 		_professorService = new Lazy<IProfessorService>(() => new ProfessorService(repositoryManager, logger, mapper, userManager));
 		_studentService = new Lazy<IStudentService>(() => new StudentService(repositoryManager, mapper, userManager));
-		_submitionService = new Lazy<ISubmitionService>(() => new SubmitionService(repositoryManager, logger, mapper, userManager));
+		_submitionService = new Lazy<ISubmitionService>(() => new SubmitionService(repositoryManager, logger, mapper));
 	}
 
 	public IUniversityService UniversityService => _universityService.Value;

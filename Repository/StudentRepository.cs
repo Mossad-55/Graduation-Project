@@ -10,6 +10,10 @@ internal sealed class StudentRepository : RepositoryBase<Student>, IStudentRepos
     {
     }
 
+    public bool CheckForStudentById(Guid id, bool trackChanges) =>
+        FindByCondition(s => s.Id == id, trackChanges)
+        .FirstOrDefault() != null;
+
     public Student GetStudentWithSubjects(Guid id, bool trackChanges) =>
         FindByCondition(s => s.Id == id, trackChanges)
         .Include(s => s.Subjects)
