@@ -83,5 +83,9 @@ public class MappingProfile : Profile
             .ForMember(s => s.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
         CreateMap<Student, StudentDto>();
+
+        // Submition Mapping
+        CreateMap<Submition, SubmitionDto>();
+        CreateMap<SubmitionForCreationDto, Submition>();
     }
 }
