@@ -43,4 +43,5 @@ public class RepositoryContext : IdentityDbContext<User>
     public DbSet<DepartmentAdmin>? DepartmentAdmins { get; set; }
     public DbSet<Professor>? Professors { get; set; }
     public DbSet<Student>? Students { get; set; }
+    public DbSet<Submition>? Submitions { get; set; }
 }
