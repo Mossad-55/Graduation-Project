@@ -10,21 +10,21 @@ public class Submition
     [Required]
     public DateTime SubmitionDate { get; set; }
     [Required]
-    public int InstEffic { get; set; }
+    public int InstructorEfficiency { get; set; }
     [Required]
     public int CourseUnderstand { get; set; }
     [Required]
-    public int IntRespect { get; set; }
+    public int InstructorRespect { get; set; }
     [Required]
-    public int InstMaterial { get; set; }
+    public int InstructorMaterial { get; set; }
     [Required]
     public int ExamContent { get; set; }
     [Required]
-    public int AssisTeacher { get; set; }
+    public int AssistantTeacher { get; set; }
     [Required]
-    public int InstRecommend { get; set; }
+    public int InstructorRecommendation { get; set; }
     [Required]
-    public int CourseRecommend { get; set; }
+    public int CourseRecommendation { get; set; }
     [Required]
     public int CourseMarket { get; set; }
 
