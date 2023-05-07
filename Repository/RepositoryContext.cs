@@ -29,7 +29,7 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new FacultyAdminConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentAdminConfiguration());
         modelBuilder.ApplyConfiguration(new ProfessorConfiguration());
-        
+
     }
 
     // DbSets Here.

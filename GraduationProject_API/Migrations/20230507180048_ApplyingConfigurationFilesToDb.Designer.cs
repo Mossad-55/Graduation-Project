@@ -12,8 +12,8 @@ using Repository;
 namespace GraduationProject_API.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230506122907_AddedSubmitionsTb")]
-    partial class AddedSubmitionsTb
+    [Migration("20230507180048_ApplyingConfigurationFilesToDb")]
+    partial class ApplyingConfigurationFilesToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -430,13 +430,13 @@ namespace GraduationProject_API.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("SubmitionId");
 
-                    b.Property<int>("AssisTeacher")
+                    b.Property<int>("AssistantTeacher")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseMarket")
                         .HasColumnType("int");
 
-                    b.Property<int>("CourseRecommend")
+                    b.Property<int>("CourseRecommendation")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseUnderstand")
@@ -445,16 +445,16 @@ namespace GraduationProject_API.Migrations
                     b.Property<int>("ExamContent")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstEffic")
+                    b.Property<int>("InstructorEfficiency")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstMaterial")
+                    b.Property<int>("InstructorMaterial")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstRecommend")
+                    b.Property<int>("InstructorRecommendation")
                         .HasColumnType("int");
 
-                    b.Property<int>("IntRespect")
+                    b.Property<int>("InstructorRespect")
                         .HasColumnType("int");
 
                     b.Property<Guid>("QuestionnaireId")
@@ -626,7 +626,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "99328045-8ECF-40A1-9F0B-0DEA6398F09A",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0ed2b7e8-adbe-43e2-b9ad-0aa3097946c1",
+                            ConcurrencyStamp = "459b4109-6967-4695-855c-faf0a1f71ff2",
                             Email = "john.doe@example.com",
                             EmailConfirmed = true,
                             FirstName = "John",
@@ -634,10 +634,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHN.DOE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEACA9L3K+JUts4r3BMDKK82+JuKSo7/WDzFzIXPNxVnfHibg3sCKafB4No4aoBAvww==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOvIRc9XO5i73w5EuAGGXl60soohyvhEYbdkwfDOU0uH6I2BzvZ8QyNELWety+qQuw==",
                             PhoneNumber = "01239931230",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2b0dbcc-c190-4e09-8d84-5c40d5f789e0",
+                            SecurityStamp = "15c16ad3-102c-4510-9dcf-1e732fb84680",
                             TwoFactorEnabled = false,
                             UserName = "john.doe@example.com"
                         },
@@ -645,7 +645,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "69E0E900-6DE2-45E8-85CA-583B32C5C5AA",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6780baa9-8a11-43e7-83e7-60ca449ea207",
+                            ConcurrencyStamp = "f1fd95d3-d73b-4f57-ae21-f2568280c948",
                             Email = "jane.doe@example.com",
                             EmailConfirmed = true,
                             FirstName = "Jane",
@@ -653,10 +653,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "JANE.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JANE.DOE@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAICo7jgSRSPXfNUqKtmPwvGTrkLALN9qtFq/WWIaLj0fJki9eZ+lq5TnZDOUa0zMQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJr12H3hpaawKjV2IVxywdDPLsuXM8SNigxvtoOH864WNS1dYU0b0qZAocbWb/YYiQ==",
                             PhoneNumber = "01203993009",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d0259e02-52d1-46c2-853c-38826edd81f1",
+                            SecurityStamp = "d02e63f0-c1c0-4003-a30f-a583e73949f8",
                             TwoFactorEnabled = false,
                             UserName = "jane.doe@example.com"
                         },
@@ -664,7 +664,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "7A369173-1E2F-491F-874F-7B324C034BC2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "de646027-d60c-4ba8-ab17-6f3fe0bb5729",
+                            ConcurrencyStamp = "bb0dcf8d-26b4-44fb-974b-833723e28523",
                             Email = "bob.smith@example.com",
                             EmailConfirmed = true,
                             FirstName = "Bob",
@@ -672,10 +672,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "BOB.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "BOB.SMITH@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMhDAiBCj4mX2julbwGOkJeXZM5cOt/yToBdRcy2Cugao+eAqgHJ4rJ0E0r3J6dmRw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJXg8X5Ar3XUmRVxvJ6gdRIaN+Q1G7Z8fletVIIvSoqv/vepKWf38HCWCPwSbwcsnQ==",
                             PhoneNumber = "011234356789",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9fc0778f-a8ea-4707-88e0-241e792880e5",
+                            SecurityStamp = "2249af47-fc22-46eb-b963-306daee7fa1b",
                             TwoFactorEnabled = false,
                             UserName = "bob.smith@example.com"
                         },
@@ -683,7 +683,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "FDC74EF3-1E3D-4A13-9F19-4E381CE4C3D2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "229b3cd7-7817-499e-be41-820256cc4f60",
+                            ConcurrencyStamp = "d28c81d4-7dc2-46c4-8d37-974b2a95493d",
                             Email = "sara.jones@example.com",
                             EmailConfirmed = true,
                             FirstName = "Sara",
@@ -691,10 +691,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SARA.JONES@EXAMPLE.COM",
                             NormalizedUserName = "SARA.JONES@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJHmHXFzE06ed2W9eYEljWyuiPC/OjXkPUjRTwSJBOtLzYb/pJ05Yyq2NRs24D8iAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOwTxtpFC9uLx8Wry+/4NwVImPA4hn4KaKc4dVcWG9nrwzWcOXQSp0s+vsnfKe6qdQ==",
                             PhoneNumber = "010765432231",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4256a99a-91c7-47e8-aabc-3f75abecd13e",
+                            SecurityStamp = "da1d2de5-b6bf-4d42-8b5e-c3e041adb7c5",
                             TwoFactorEnabled = false,
                             UserName = "sara.jones@example.com"
                         },
@@ -702,7 +702,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "706870e9-e373-11ed-b719-105badc84798",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1d626f1a-641c-4a2f-95bf-08afe367f569",
+                            ConcurrencyStamp = "089d941a-1f6c-4d80-b7f3-e7f98fcf003c",
                             Email = "Mo.Zi@example.com",
                             EmailConfirmed = true,
                             FirstName = "Mo",
@@ -710,10 +710,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MO.ZI@EXAMPLE.COM",
                             NormalizedUserName = "MO.ZI@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFfVR3xX794Vy2k8P6GXrbTuqty4e9QUXW1RRSB3AU1Is8CHr5yxFtwK6Q/RLwB+Gw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELtqnHD0z3JLfp0MvXwfW2kgazzknJSrvpSOf7HXwaMXjjrZ/S3j2fNcTnvQwVgXQA==",
                             PhoneNumber = "01279426209",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "661227de-6d60-4481-91de-b828ddb17664",
+                            SecurityStamp = "aa61cad6-6f69-42b0-b245-3304c0d196b6",
                             TwoFactorEnabled = false,
                             UserName = "Mo.Zi@example.com"
                         },
@@ -721,7 +721,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "706b3236-e373-11ed-a003-105badc84798",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4187e85b-dea5-4276-89dd-27d7a3e68c13",
+                            ConcurrencyStamp = "c6f9738a-a4c2-472c-a45c-5c9ece43c3ef",
                             Email = "Majdi.Fares@example.com",
                             EmailConfirmed = true,
                             FirstName = "Majdi",
@@ -729,10 +729,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MAJDI.FARES@EXAMPLE.COM",
                             NormalizedUserName = "MAJDI.FARES@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIjlCWqOUAzlhcPZIf/dtABCQIp60Ayj1I1lRbMR1Pk+nJ5vjCNQhzh3xyppr90akQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECAGZ7cvWmuXVxJW+yNLkRfPVcfBmUOTtnPkxJusSKBbSJJhJk4r9kzk9YLgc3DYcw==",
                             PhoneNumber = "01270867190",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4eb68407-78f4-4e83-ac1a-930215135dd6",
+                            SecurityStamp = "2a468375-4dfb-43d2-a5e5-0f05f55ca363",
                             TwoFactorEnabled = false,
                             UserName = "Majdi.Fares@example.com"
                         },
@@ -740,7 +740,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "706b3237-e373-11ed-988f-105badc84798",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b3c7903-f45f-4f5e-a423-15b8bc359495",
+                            ConcurrencyStamp = "e2996374-83aa-4f2b-8b91-959e2cad8415",
                             Email = "Hamza.Yisri@example.com",
                             EmailConfirmed = true,
                             FirstName = "Hamza",
@@ -748,10 +748,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HAMZA.YISRI@EXAMPLE.COM",
                             NormalizedUserName = "HAMZA.YISRI@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDiJQS5T+QTBLPO7pmQ2MroguKKru6kAANQje82/f8vlWTGxyEZPt2nmQLxm6iStDw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGYamRrHxDkHA+H0GyF4zsDaG8Mm09duBMEB8X5cHcgy0MwHAQ3CBKewWGZOapDewg==",
                             PhoneNumber = "01256543256",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9c7fb637-5979-4275-a2c3-14e145773a95",
+                            SecurityStamp = "22427ddb-78e2-41cd-bcfa-e46be78ac7e0",
                             TwoFactorEnabled = false,
                             UserName = "Hamza.Yisri@example.com"
                         },
@@ -759,7 +759,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "5AAFE5DF-CB75-4DFA-898A-9A1C4E9BB5A5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9143f433-d97f-4a9f-8b89-3823a4dae868",
+                            ConcurrencyStamp = "c09f3397-2b8f-4671-8939-5ec98cf3138c",
                             Email = "mosad5@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Mossad",
@@ -767,10 +767,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MOSAD5@GMAIL.COM",
                             NormalizedUserName = "MOSAD5@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL9rhmQN2cfimlyYnjcieE+/Rnr2peBAJmtpOFEI6EP5GGUwKD/hkEBc7d7MYNJPGg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBndkAZSKquHoMD1lylnmRVgxdPwpiF+wowkrrKj43GcoYHkIalgrThmYh0JIEjg6A==",
                             PhoneNumber = "+201211820083",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bbcbf3e8-08d9-4b8e-8358-8aefc8b7fffa",
+                            SecurityStamp = "62ba76b9-e501-40d4-88b7-fee6bfa45517",
                             TwoFactorEnabled = false,
                             UserName = "mosad5@gmail.com"
                         },
@@ -778,7 +778,7 @@ namespace GraduationProject_API.Migrations
                         {
                             Id = "4A8CA884-C093-43C4-A019-EE6D804BF85E",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0b8c0c0b-83c9-48f2-bf86-6cdfa5c4cf59",
+                            ConcurrencyStamp = "b285db12-d9d8-4f79-8522-651080648c8e",
                             Email = "mosad53@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Mossad",
@@ -786,10 +786,10 @@ namespace GraduationProject_API.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MOSAD53@GMAIL.COM",
                             NormalizedUserName = "MOSAD53@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHp85FzLrdGZMW1K48yej9edoDcfXctQJp+LyIgJUUhQ3SPu+N2iSRm8RNi7d7JFqQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEONu0FM+bx1F+a4IT1PNopW3VAoVqk3w4HZKDOytQ4yMMj3lc0JavY+NWlcN3vFWjQ==",
                             PhoneNumber = "+201211820083",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad2dd006-4db4-4540-8c54-24bcbbf347b8",
+                            SecurityStamp = "f347b42f-5577-4acf-b23c-3319b494488a",
                             TwoFactorEnabled = false,
                             UserName = "mosad53@gmail.com"
                         });
@@ -825,35 +825,35 @@ namespace GraduationProject_API.Migrations
                         new
                         {
                             Id = "BEA713C7-93D2-4F39-8DC8-18F2F3070779",
-                            ConcurrencyStamp = "0876ca86-d16e-4e3d-95ca-febfac3f030b",
+                            ConcurrencyStamp = "37d5edb6-609a-4989-9130-879d827c0c49",
                             Name = "University Admin",
                             NormalizedName = "UNIVERSITY ADMIN"
                         },
                         new
                         {
                             Id = "A2523A70-57E3-4B69-A405-F9752517ED62",
-                            ConcurrencyStamp = "7cabdae9-5e19-44a8-abea-3f1516af46d7",
+                            ConcurrencyStamp = "1ee6bac3-9c56-4ec1-8c74-9b8bb5b30a9b",
                             Name = "Faculty Admin",
                             NormalizedName = "FACULTY ADMIN"
                         },
                         new
                         {
                             Id = "64F2143D-B896-4355-90D2-AFD22424B234",
-                            ConcurrencyStamp = "a7a30ff0-ecf3-4f81-b25b-e6590df1d575",
+                            ConcurrencyStamp = "3d1e2d4a-3d25-46aa-a2b6-5230216be456",
                             Name = "Department Admin",
                             NormalizedName = "DEPARTMENT ADMIN"
                         },
                         new
                         {
                             Id = "E5E3E33B-D9F2-4E95-9CEB-26F28A0028E7",
-                            ConcurrencyStamp = "cde3caf1-1269-4e1f-84e6-8a757f2534e3",
+                            ConcurrencyStamp = "08c5999d-543b-4747-a02e-1d06f2d02306",
                             Name = "Professor",
                             NormalizedName = "PROFESSOR"
                         },
                         new
                         {
                             Id = "E26639C4-7023-4878-A497-FC4B12CFA272",
-                            ConcurrencyStamp = "a558322d-1555-403a-8899-6a334c501b6c",
+                            ConcurrencyStamp = "dff747e3-a711-4304-90a4-9cfa483de9e5",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         });
