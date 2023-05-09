@@ -21,7 +21,6 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new UniversityConfiguration());
         modelBuilder.ApplyConfiguration(new FacultyConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-        modelBuilder.ApplyConfiguration(new SubjectConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new UserRolesConfiguration());
@@ -29,7 +28,10 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new FacultyAdminConfiguration());
         modelBuilder.ApplyConfiguration(new DepartmentAdminConfiguration());
         modelBuilder.ApplyConfiguration(new ProfessorConfiguration());
-
+        modelBuilder.ApplyConfiguration(new StudentConfiguration());
+        modelBuilder.ApplyConfiguration(new SubjectConfiguration());
+        modelBuilder.ApplyConfiguration(new QuestionnaireConfiguration());
+        modelBuilder.ApplyConfiguration(new SubmitionConfiguration());
     }
 
     // DbSets Here.
