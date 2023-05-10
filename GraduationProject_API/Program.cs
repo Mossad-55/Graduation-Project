@@ -33,7 +33,8 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
-}).AddApplicationPart(typeof(GraduationProject_API.Presentation.AssemblyReference).Assembly);
+}).AddCustomCsvFormatter()
+  .AddApplicationPart(typeof(GraduationProject_API.Presentation.AssemblyReference).Assembly);
 
 
 var app = builder.Build();

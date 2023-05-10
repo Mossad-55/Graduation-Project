@@ -1,5 +1,5 @@
 ﻿namespace Shared.DataTranferObjects;
 
-public record SubmitionDto(Guid Id, int InstEffic, int CourseUnderstand, int IntRespect
-    , int InstMaterial, int ExamContent, int AssisTeacher, int InstRecommend
-    , int CourseRecommend, int CourseMarket);
+public record SubmitionDto(Guid Id, int InstructorEfficiency, int CourseUnderstand, int InstructorRespect
+    , int InstructorMaterial, int ExamContent, int AssistantTeacher, int InstructorRecommendation
+    , int CourseRecommendation, int CourseMarket);

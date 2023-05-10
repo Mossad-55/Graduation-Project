@@ -60,4 +60,8 @@ public static class ServiceExtensions
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();
     }
+
+    // Configure our custom CSV Formatter.
+    public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder1) =>
+        builder1.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 }
