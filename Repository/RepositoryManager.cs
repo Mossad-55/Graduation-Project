@@ -16,6 +16,9 @@ public sealed class RepositoryManager : IRepositoryManager
     private readonly Lazy<IProfessorRepository> _professorRepository;
     private readonly Lazy<IStudentRepository> _studentRepository;
     private readonly Lazy<ISubmitionRepository> _submitionRepository;
+    private readonly Lazy<IFacultyAnalysisRepository> _facultyAnalysisRepository;
+    private readonly Lazy<IDepartmentAnalysisRepository> _departmentAnalysisRepository;
+    private readonly Lazy<ISubjectAnalysisRepository> _subjectAnalysisRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -31,6 +34,9 @@ public sealed class RepositoryManager : IRepositoryManager
         _professorRepository = new Lazy<IProfessorRepository>(() => new ProfessorRepository(repositoryContext));
         _studentRepository = new Lazy<IStudentRepository>(() => new StudentRepository(repositoryContext));
         _submitionRepository = new Lazy<ISubmitionRepository>(() => new SubmitionRepository(repositoryContext));
+        _facultyAnalysisRepository = new Lazy<IFacultyAnalysisRepository>(() => new FacultyAnalysisRepository(repositoryContext));
+        _departmentAnalysisRepository = new Lazy<IDepartmentAnalysisRepository>(() => new DepartmentAnalysisRepository(repositoryContext));
+        _subjectAnalysisRepository = new Lazy<ISubjectAnalysisRepository>(() => new SubjectAnalysisRepository(repositoryContext));
     }
 
     public IUniversityRepository University => _universityRepository.Value;
@@ -44,6 +50,9 @@ public sealed class RepositoryManager : IRepositoryManager
     public IProfessorRepository Professor => _professorRepository.Value;
     public IStudentRepository Student => _studentRepository.Value;
     public ISubmitionRepository Submition => _submitionRepository.Value;
+    public IFacultyAnalysisRepository FacultyAnalysis => _facultyAnalysisRepository.Value;
+    public IDepartmentAnalysisRepository DepartmentAnalysis => _departmentAnalysisRepository.Value;
+    public ISubjectAnalysisRepository SubjectAnalysis => _subjectAnalysisRepository.Value;
 
     public void Save() => _repositoryContext.SaveChanges();
 }
