@@ -62,6 +62,6 @@ public static class ServiceExtensions
     }
 
     // Configure our custom CSV Formatter.
-    public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder1) =>
-        builder1.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
+    public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder) =>
+        builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 }

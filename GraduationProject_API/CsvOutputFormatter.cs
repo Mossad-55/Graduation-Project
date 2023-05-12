@@ -7,9 +7,9 @@ namespace GraduationProject_API;
 
 public class CsvOutputFormatter : TextOutputFormatter
 {
-	public CsvOutputFormatter()
-	{
-		SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/csv"));
+    public CsvOutputFormatter()
+    {
+        SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/csv"));
         SupportedEncodings.Add(Encoding.UTF8);
         SupportedEncodings.Add(Encoding.Unicode);
     }
@@ -34,10 +34,14 @@ public class CsvOutputFormatter : TextOutputFormatter
         if (context.Object is IEnumerable<SubmitionDto>)
         {
             foreach (var submition in (IEnumerable<SubmitionDto>)context.Object)
+            {
                 FormatCsv(buffer, submition);
+            }
         }
         else
+        {
             FormatCsv(buffer, (SubmitionDto)context.Object);
+        }
 
         await response.WriteAsync(buffer.ToString());
     }

@@ -36,12 +36,4 @@ public class StudentsController : ControllerBase
         
         return NoContent();
     }
-
-    [HttpGet("questionnaire/{questionnaireId}")]
-    public IActionResult GetSubmition(Guid questionnaireId)
-    {
-        var submitions = _service.SubmitionService.GetSubmitionsForQuestionnaire(questionnaireId, false);
-
-        return Ok(submitions);
-    }
 }
