@@ -16,6 +16,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
                 Name = "Computer Science",
                 Description = "The Computer Science Department at Damanhour University is a vibrant academic community dedicated to advancing knowledge and technology in the field of computer science. The department offers a range of undergraduate and graduate programs that provide students with a solid foundation in computer science theory and practical skills.",
                 FacultyId = new Guid("D0552B49-6E7D-4CED-8A30-62CE8066A2D4"),
+                IFrame = ""
             },
             new Department
             {
@@ -23,6 +24,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
                 Name = "Information Technology",
                 Description = "The Information Technology (IT) Department at Damanhour University is a dynamic and innovative academic community dedicated to advancing the field of information technology through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a comprehensive understanding of the theory and practice of IT.",
                 FacultyId = new Guid("D0552B49-6E7D-4CED-8A30-62CE8066A2D4"),
+                IFrame = ""
             },
             new Department
             {
@@ -30,6 +32,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
                 Name = "Information System",
                 Description = "The Information Systems (IS) Department at Damanhour University is a forward-thinking and innovative academic community dedicated to advancing the field of information systems through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a comprehensive understanding of the theory and practice of information systems.",
                 FacultyId = new Guid("D0552B49-6E7D-4CED-8A30-62CE8066A2D4"),
+                IFrame = ""
             },
             new Department
             {
@@ -37,6 +40,7 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
                 Name = "Multimedia",
                 Description = "The Multimedia Department at Damanhour University is a dynamic and creative academic community dedicated to advancing the field of multimedia through teaching, research, and service. The department offers a range of undergraduate and graduate programs that provide students with a solid foundation in multimedia theory and practical skills.",
                 FacultyId = new Guid("D0552B49-6E7D-4CED-8A30-62CE8066A2D4"),
+                IFrame = ""
             }
         );
     }

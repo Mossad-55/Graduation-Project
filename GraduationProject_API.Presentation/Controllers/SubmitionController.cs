@@ -14,8 +14,6 @@ public class SubmitionController : ControllerBase
     [HttpGet("questionnaires/{questionnaireId}/submitions")]
     public IActionResult GetSubmitionsForQuestionnaire(Guid questionnaireId)
     {
-
-        // لازم اضيف العمود الزيادة في الكوستشنير و لما زيدان يطلب مني اخليه ب ترو
         var submitions = _service.SubmitionService.GetSubmitionsForQuestionnaire(questionnaireId, false);
 
         return Ok(submitions);

@@ -6,6 +6,7 @@ public class Professor
 {
     public Guid Id { get; set; }
     public double Rate { get; set; }
+    public string IFrame { get; set; }
 
     [ForeignKey(nameof(University))]
     public Guid UniveristyId { get; set; }

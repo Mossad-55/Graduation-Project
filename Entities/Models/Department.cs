@@ -15,6 +15,8 @@ public class Department
     [Required(ErrorMessage = "Description is a required field.")]
     public string? Description { get; set; }
     public double Rate { get; set; }
+    public string IFrame { get; set; }
+
 
     [ForeignKey(nameof(Faculty))]
     public Guid FacultyId { get; set; }
