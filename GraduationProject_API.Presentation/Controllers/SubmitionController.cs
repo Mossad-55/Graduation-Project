@@ -11,21 +11,13 @@ public class SubmitionController : ControllerBase
 
 	public SubmitionController(IServiceManager service) => _service = service;
 
-    [HttpGet("questionnaires/{questionnaireId}/submitions")]
-    public IActionResult GetSubmitionsForQuestionnaire(Guid questionnaireId)
-    {
-        var submitions = _service.SubmitionService.GetSubmitionsForQuestionnaire(questionnaireId, false);
-
-        return Ok(submitions);
-    }
-
     [HttpGet("questionnaires/{questionnaireId}/students/{studentId}/check")]
     public IActionResult CheckStudentSubmition(Guid questionnaireId, Guid studentId)
     {
         var result = _service.SubmitionService.CheckStudentSubmition(questionnaireId, studentId, false);
         if (result)
-            return Ok(new {message = "Student can submit"});
+            return Ok(new {message = "Please answer the following questions."});
 
-        return BadRequest(new {message = "Student has already submitted the questionnaire"});
+        return BadRequest(new {message = "You had already submitted the questionnaire."});
     }
 }

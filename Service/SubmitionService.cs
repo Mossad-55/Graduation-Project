@@ -48,17 +48,4 @@ internal sealed class SubmitionService : ISubmitionService
 
         return _repository.Submition.CheckForStudentSubmition(questionnaireId, studentId, trackChanges);
     }
-
-    public IEnumerable<SubmitionDto> GetSubmitionsForQuestionnaire(Guid questionnaireId, bool trackChanges)
-    {
-        var questionnaire = _repository.Questionnaire.GetQuestionnaireById(questionnaireId, trackChanges);
-        if (questionnaire is null)
-            throw new QuestionnaireNotFoundException(questionnaireId);
-
-        var submitionsEntity = _repository.Submition.GetSubmitionsForQuestionnaire(questionnaireId, trackChanges);
-
-        var submitionsDto = _mapper.Map<IEnumerable<SubmitionDto>>(submitionsEntity);
-
-        return submitionsDto;
-    }
 }

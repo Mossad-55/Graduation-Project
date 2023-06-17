@@ -3,8 +3,6 @@
 namespace Service.Contracts;
 public interface ISubmitionService
 {
-    IEnumerable<SubmitionDto> GetSubmitionsForQuestionnaire(Guid questionnaireId, bool trackChanges);
-
     void AddSubmition(Guid questionnaireId, Guid studentId, SubmitionForCreationDto submition, bool trackChanges);
     bool CheckStudentSubmition(Guid questionnaireId, Guid studentId, bool trackChanges);
 }

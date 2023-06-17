@@ -20,7 +20,4 @@ internal sealed class SubmitionRepository : RepositoryBase<Submition>, ISubmitio
         FindByCondition(q => q.QuestionnaireId == questionnaireId && q.StudentId == studentId, trackChanges)
         .FirstOrDefault() != null;
 
-    public IEnumerable<Submition> GetSubmitionsForQuestionnaire(Guid questionnaireId, bool trackChanges) =>
-        FindByCondition(s => s.QuestionnaireId == questionnaireId, trackChanges)
-        .ToList();
 }
