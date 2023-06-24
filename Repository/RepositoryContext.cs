@@ -30,8 +30,6 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new ProfessorConfiguration());
         modelBuilder.ApplyConfiguration(new StudentConfiguration());
         modelBuilder.ApplyConfiguration(new SubjectConfiguration());
-        modelBuilder.ApplyConfiguration(new QuestionnaireConfiguration());
-        modelBuilder.ApplyConfiguration(new SubmitionConfiguration());
     }
 
     // DbSets Here.
@@ -49,4 +47,6 @@ public class RepositoryContext : IdentityDbContext<User>
     public DbSet<FacultyAnalysis>? FacultyAnalyses { get; set; }
     public DbSet<DepartmentAnalysis>? DepartmentAnalyses { get; set; }
     public DbSet<SubjectAnalysis>? SubjectAnalyses { get; set; }
+    public DbSet<SubjectConclusion>? SubjectConclusions { get; set; }
+    public DbSet<Recommendation>? Recommendations { get; set; }
 }

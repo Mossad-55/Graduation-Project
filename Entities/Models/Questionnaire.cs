@@ -15,6 +15,7 @@ public class Questionnaire
     public DateTime CreatedAt { get; set; }
     [Required]
     public DateTime EndDate { get; set;}
+    public string? IFrame { get; set; }
 
     [ForeignKey(nameof(Subject))]
     public Guid SubjectId { get; set; }

@@ -16,6 +16,7 @@ public class University
     public string? Description { get; set; }
 
     public double Rate { get; set; }
+    public string? IFrame { get; set; }
     
     public ICollection<Faculty>? Faculties { get; set; }
 }
