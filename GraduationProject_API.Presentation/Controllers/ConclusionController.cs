@@ -18,4 +18,12 @@ public class ConclusionController : ControllerBase
 
         return Ok(conclusion);
     }
+
+    [HttpGet("questionnaires/{questionnaireId}/conclusion")]
+    public IActionResult GetConclusionForQuestionnaire(Guid questionnaireId)
+    {
+        var conclusion = _service.SubjectConclusion.GetConclusionForQuestionnaire(questionnaireId, false);
+
+        return Ok(conclusion);
+    }
 }

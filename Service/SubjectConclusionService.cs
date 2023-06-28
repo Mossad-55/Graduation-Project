@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -16,6 +17,21 @@ internal sealed class SubjectConclusionService : ISubjectConclusionService
         _repository = repository;
         _mapper = mapper;
         _logger = logger;
+    }
+
+    public SubjectConclusionDto GetConclusionForQuestionnaire(Guid questionnaireId, bool trackChanges)
+    {
+        var questionnaire = _repository.Questionnaire.GetQuestionnaireById(questionnaireId, trackChanges);
+        if (questionnaire is null)
+            throw new QuestionnaireNotFoundException(questionnaireId);
+
+        var conclusion = _repository.SubjectConclusion.GetSubjectConclusionForQuestionnaire(questionnaireId, trackChanges);
+        if (conclusion is null)
+            return null;
+
+        var conclusionDto = _mapper.Map<SubjectConclusionDto>(conclusion);
+
+        return conclusionDto;
     }
 
     public SubjectConclusionDto GetLatestConclusionForSubject(Guid subjectId, bool trackChanges)
