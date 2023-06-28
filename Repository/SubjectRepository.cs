@@ -25,4 +25,8 @@ internal sealed class SubjectRepository : RepositoryBase<Subject>, ISubjectRepos
     public Subject GetSubject(Guid departmentId, Guid id, bool trackChanges) =>
         FindByCondition(s => s.DepartmentId == departmentId && s.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public Subject GetSubjectById(Guid subjectId, bool trackChanges) =>
+        FindByCondition(s => s.Id == subjectId, trackChanges)
+        .FirstOrDefault();
 }
