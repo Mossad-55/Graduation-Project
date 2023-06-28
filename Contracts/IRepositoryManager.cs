@@ -17,6 +17,8 @@ public interface IRepositoryManager
     IFacultyAnalysisRepository FacultyAnalysis { get; }
     IDepartmentAnalysisRepository DepartmentAnalysis { get; }
     ISubjectAnalysisRepository SubjectAnalysis { get; }
+    ISubjectConclusionRepository SubjectConclusion { get; }
+    IRecommendationRepository Recommendation { get; }
 
     // Shared Functions.
     void Save();
