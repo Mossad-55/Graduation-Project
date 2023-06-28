@@ -87,5 +87,14 @@ public class MappingProfile : Profile
         // Submition Mapping
         CreateMap<Submition, SubmitionDto>();
         CreateMap<SubmitionForCreationDto, Submition>();
+
+        // Subject Conclusion Mapping
+        CreateMap<SubjectConclusion, SubjectConclusionDto>()
+            .ForCtorParam("Date",
+            opts => opts.MapFrom(x => x.Date.ToShortDateString()))
+            .ForCtorParam("GoodConclusion",
+            opts => opts.MapFrom(x => x.GoodConclusion.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)))
+            .ForCtorParam("BadConclusion",
+            opts => opts.MapFrom(x => x.BadConclusion.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)));
     }
 }
