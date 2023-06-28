@@ -20,6 +20,7 @@ public sealed class RepositoryManager : IRepositoryManager
     private readonly Lazy<IDepartmentAnalysisRepository> _departmentAnalysisRepository;
     private readonly Lazy<ISubjectAnalysisRepository> _subjectAnalysisRepository;
     private readonly Lazy<ISubjectConclusionRepository> _subjectConclusionRepository;
+    private readonly Lazy<IRecommendationRepository> _recommendationRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -39,6 +40,7 @@ public sealed class RepositoryManager : IRepositoryManager
         _departmentAnalysisRepository = new Lazy<IDepartmentAnalysisRepository>(() => new DepartmentAnalysisRepository(repositoryContext));
         _subjectAnalysisRepository = new Lazy<ISubjectAnalysisRepository>(() => new SubjectAnalysisRepository(repositoryContext));
         _subjectConclusionRepository = new Lazy<ISubjectConclusionRepository>(() => new SubjectConclusionRepository(repositoryContext));
+        _recommendationRepository = new Lazy<IRecommendationRepository>(() => new RecommendationRepository(repositoryContext));
     }
 
     public IUniversityRepository University => _universityRepository.Value;
@@ -56,6 +58,7 @@ public sealed class RepositoryManager : IRepositoryManager
     public IDepartmentAnalysisRepository DepartmentAnalysis => _departmentAnalysisRepository.Value;
     public ISubjectAnalysisRepository SubjectAnalysis => _subjectAnalysisRepository.Value;
     public ISubjectConclusionRepository SubjectConclusion => _subjectConclusionRepository.Value;
+    public IRecommendationRepository Recommendation =>  _recommendationRepository.Value;
 
     public void Save() => _repositoryContext.SaveChanges();
 }
