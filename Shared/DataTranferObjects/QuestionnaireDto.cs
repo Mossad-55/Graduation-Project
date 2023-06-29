@@ -1,3 +1,3 @@
 ﻿namespace Shared.DataTranferObjects;
 
-public record QuestionnaireDto(Guid Id, string Title, DateTime CreatedAt, DateTime EndDate);
+public record QuestionnaireDto(Guid Id, string Title, DateTime CreatedAt, DateTime EndDate, string IFrame);

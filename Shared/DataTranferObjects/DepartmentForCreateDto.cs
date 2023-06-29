@@ -1,3 +1,3 @@
 ﻿namespace Shared.DataTranferObjects;
 
-public record DepartmentForCreateDto(string Name, string Description);
+public record DepartmentForCreateDto(string Name, string Description, string IFrame = "");

@@ -7,5 +7,6 @@ public class ProfessorDto
     public string Email { get; init; }
     public string PhoneNumber { get; init; }
     public double Rate { get; set; }
+    public string IFrame { get; set; }
     public ICollection<SubjectForProfessorDto>? Subjects { get; set; }
 }

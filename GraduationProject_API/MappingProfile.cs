@@ -96,5 +96,14 @@ public class MappingProfile : Profile
             opts => opts.MapFrom(x => x.GoodConclusion.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)))
             .ForCtorParam("BadConclusion",
             opts => opts.MapFrom(x => x.BadConclusion.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)));
+
+        // Recommendation Mapping
+        CreateMap<Recommendation, RecommendationDto>()
+            .ForCtorParam("Date",
+            opts => opts.MapFrom(x => x.Date.ToShortDateString()))
+            .ForCtorParam("SubjectName",
+            opts => opts.MapFrom(x => x.Subject.Name))
+            .ForCtorParam("Content",
+            opts => opts.MapFrom(x => x.Content.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)));
     }
 }

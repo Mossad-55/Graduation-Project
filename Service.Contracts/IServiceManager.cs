@@ -15,4 +15,5 @@ public interface IServiceManager
     IStudentService StudentService { get; }
     ISubmitionService SubmitionService { get; }
     ISubjectConclusionService SubjectConclusion { get; }
+    IRecommendationService Recommendation { get; }
 }

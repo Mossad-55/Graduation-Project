@@ -20,6 +20,7 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<IStudentService> _studentService;
     private readonly Lazy<ISubmitionService> _submitionService;
     private readonly Lazy<ISubjectConclusionService> _subjectConclusionService;
+    private readonly Lazy<IRecommendationService> _recommendationService;
 
 	public ServiceManager(IRepositoryManager repositoryManager, 
 		ILoggerManager logger, IMapper mapper, UserManager<User> userManager)
@@ -36,6 +37,7 @@ public sealed class ServiceManager : IServiceManager
 		_studentService = new Lazy<IStudentService>(() => new StudentService(repositoryManager, mapper, userManager));
 		_submitionService = new Lazy<ISubmitionService>(() => new SubmitionService(repositoryManager, logger, mapper));
 		_subjectConclusionService = new Lazy<ISubjectConclusionService>(() => new SubjectConclusionService(repositoryManager, logger,  mapper));
+		_recommendationService = new Lazy<IRecommendationService>(() => new RecommendationService(repositoryManager, logger,  mapper));
 	}
 
 	public IUniversityService UniversityService => _universityService.Value;
@@ -50,4 +52,5 @@ public sealed class ServiceManager : IServiceManager
 	public IStudentService StudentService => _studentService.Value;
 	public ISubmitionService SubmitionService => _submitionService.Value;
 	public ISubjectConclusionService SubjectConclusion => _subjectConclusionService.Value;
+	public IRecommendationService Recommendation => _recommendationService.Value;
 }
