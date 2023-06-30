@@ -21,4 +21,6 @@ public class Department
     [ForeignKey(nameof(Faculty))]
     public Guid FacultyId { get; set; }
     public Faculty? Faculty { get; set; }
+
+    public List<Subject>? Subjects { get; set; }
 }

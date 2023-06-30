@@ -62,6 +62,19 @@ internal sealed class DepartmentService : IDepartmentService
         return departmentsDto;
     }
 
+    public IEnumerable<DepartmentWithSubjectsDto> GetAllDepartmentsWithSubjects(Guid universityId, Guid facultyId, bool trackChanges)
+    {
+        var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);
+        if (faculty is null)
+            throw new FacultyNotFoundException(facultyId);
+
+        var departmentsFromDb = _repository.Department.GetAllDepartmentsWithSubjects(facultyId, trackChanges);
+
+        var departmentsDto = _mapper.Map<IEnumerable<DepartmentWithSubjectsDto>>(departmentsFromDb);
+
+        return departmentsDto;
+    }
+
     public DepartmentDto GetDepartment(Guid universityId, Guid facultyId, Guid id, bool trackChanges)
     {
         var faculty = _repository.Faculty.GetFaculty(universityId, facultyId, trackChanges);

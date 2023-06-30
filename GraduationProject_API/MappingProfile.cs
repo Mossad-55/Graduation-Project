@@ -21,6 +21,7 @@ public class MappingProfile : Profile
 
         // Department Mapping
         CreateMap<Department, DepartmentDto>();
+        CreateMap<Department, DepartmentWithSubjectsDto>();
         CreateMap<DepartmentForCreateDto, Department>();
         CreateMap<DepartmentForUpdateDto, Department>();
 
@@ -37,7 +38,9 @@ public class MappingProfile : Profile
         CreateMap<Subject, SubjectDtoForStudent>()
             .ForMember(s => s.FullName,
             opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
-
+        CreateMap<Subject, SubjectForDepartmentDto>()
+            .ForMember(s => s.SubjectName,
+            opts => opts.MapFrom(x => string.Join(" - ", x.Name, x.Code)));
         CreateMap<SubjectForCreationDto, Subject>();
         CreateMap<SubjectForUpdateDto, Subject>();
 

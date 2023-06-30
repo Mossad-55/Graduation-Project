@@ -20,6 +20,14 @@ public class DepartmentsController : ControllerBase
         return Ok(departments);
     }
 
+    [HttpGet("low-rate")]
+    public IActionResult GetDepartmentsWithLowRate(Guid universityId, Guid facultyId)
+    {
+        var departmentsWithSubjects = _service.DepartmentService.GetAllDepartmentsWithSubjects(universityId, facultyId, false);
+
+        return Ok(departmentsWithSubjects);
+    }
+
     [HttpGet("{id:Guid}", Name = "GetDepartmentForFaculty")]
     public IActionResult GetDepartment(Guid universityId, Guid facultyId, Guid id)
     {
