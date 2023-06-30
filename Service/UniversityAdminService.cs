@@ -64,7 +64,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         await _userManager.DeleteAsync(user);
         var universityAdmin = _mapper.Map<UniversityAdmin>(user);
@@ -100,10 +100,21 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         var universityAdminDto = _mapper.Map<UserDto>(user);
         return universityAdminDto;
+    }
+
+    public UniversityAdminDto GetUniveristyAdminById(Guid id, bool trackChanges)
+    {
+        var admin = _repository.UniversityAdmin.GetUniversityAdminById(id, trackChanges);
+        if(admin is null)
+            throw new UserNotFoundException(id.ToString());
+
+        var adminDto = _mapper.Map<UniversityAdminDto>(admin);
+
+        return adminDto;
     }
 
     public async Task UpdateAdminForUniversity(Guid universityId, Guid id, UserForUpdateDto admin, bool uniTrackChanges, bool admTrackChanges)
@@ -114,7 +125,7 @@ internal sealed class UniversityAdminService : IUniversityAdminService
 
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         _mapper.Map(admin, user);
         _repository.Save();

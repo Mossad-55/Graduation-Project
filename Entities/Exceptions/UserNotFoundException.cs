@@ -2,8 +2,8 @@
 
 public sealed class UserNotFoundException : NotFoundException
 {
-    public UserNotFoundException(Guid id) 
-        : base($"The user with id: {id} doesn't exist.")
+    public UserNotFoundException(string data) 
+        : base($"The user with Email or Id: {data} doesn't exist.")
     {
     }
 }

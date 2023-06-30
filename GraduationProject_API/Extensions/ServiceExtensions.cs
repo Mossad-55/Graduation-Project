@@ -1,11 +1,15 @@
 ﻿using Contracts;
 using Entities.Models;
 using LoggerService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Service;
 using Service.Contracts;
+using Shared.Helpers;
+using System.Text;
 
 namespace GraduationProject_API.Extensions;
 
@@ -64,4 +68,40 @@ public static class ServiceExtensions
     // Configure our custom CSV Formatter.
     public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder) =>
         builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
+
+    // Configure JWT Model.
+    public static void ConfigureJWTModel(this IServiceCollection services, IConfiguration configuration) =>
+        services.Configure<JWT>(configuration.GetSection("JwtConfig"));
+
+    // Configure JWT.
+    public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = configuration.GetSection("JwtConfig");
+
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.RequireHttpsMetadata = false;
+            options.SaveToken = false;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"])),
+                ClockSkew = TimeSpan.Zero
+            };
+        });
+    }
+
+    // Configure AuthService
+    public static void ConfigureAuthService(this IServiceCollection services) =>
+        services.AddScoped<IAuthService, AuthService>();
 }

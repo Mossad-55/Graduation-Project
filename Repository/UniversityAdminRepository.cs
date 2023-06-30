@@ -24,4 +24,8 @@ internal sealed class UniversityAdminRepository : RepositoryBase<UniversityAdmin
     public UniversityAdmin GetUniversityAdmin(Guid universityId, Guid id, bool trackChanges) =>
         FindByCondition(a => a.UniversityId == universityId && a.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public UniversityAdmin GetUniversityAdminById(Guid id, bool trackChanges) =>
+        FindByCondition(a => a.Id == id, trackChanges)
+        .FirstOrDefault();
 }

@@ -26,4 +26,8 @@ internal sealed class DepartmentAdminRepository : RepositoryBase<DepartmentAdmin
     public DepartmentAdmin GetDepartmentAdmin(Guid departmentId, Guid id, bool trackChanges) =>
         FindByCondition(a => a.DepartmentId == departmentId && a.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public DepartmentAdmin GetDepartmentAdminById(Guid id, bool trackChanges) =>
+        FindByCondition(a => a.Id == id, trackChanges)
+        .FirstOrDefault();
 }

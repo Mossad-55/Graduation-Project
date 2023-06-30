@@ -23,7 +23,7 @@ internal sealed class RecommendationService : IRecommendationService
     {
         var professor = _repository.Professor.GetAProfessorWithSubjects(professorId, trackChanges);
         if (professor is null)
-            throw new UserNotFoundException(professorId);
+            throw new UserNotFoundException(professorId.ToString());
 
         List<RecommendationDto> recommendationsDto = new();
 

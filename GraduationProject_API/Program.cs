@@ -18,6 +18,9 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureIdentity();
 builder.Services.AddAuthentication();
+builder.Services.ConfigureJWTModel(builder.Configuration);
+builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.ConfigureAuthService();
 
 // Configure AutoMapper Profile.
 builder.Services.AddAutoMapper(typeof(Program));

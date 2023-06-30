@@ -26,7 +26,7 @@ internal sealed class StudentService : IStudentService
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user == null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         var studentEntity = _repository.Student.GetStudentWithSubjects(id, trackChanges);
 
@@ -41,7 +41,7 @@ internal sealed class StudentService : IStudentService
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user == null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         var studentEntity = _repository.Student.GetStudentWithSubjects(id, trackChanges);
 

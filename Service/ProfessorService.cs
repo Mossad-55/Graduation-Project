@@ -59,7 +59,7 @@ internal sealed class ProfessorService : IProfessorService
     {
         var professor = _repository.Professor.GetAProfessor(id, trackChanges);
         if (professor is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         var user = await _userManager.FindByIdAsync(id.ToString());
         await _userManager.DeleteAsync(user);
@@ -87,7 +87,7 @@ internal sealed class ProfessorService : IProfessorService
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         var professorEntity = _repository.Professor.GetAProfessorWithSubjects(id, trackChanges);
 
@@ -103,7 +103,7 @@ internal sealed class ProfessorService : IProfessorService
     {
         var user = await _userManager.FindByIdAsync(id.ToString());
         if (user is null)
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(id.ToString());
 
         _mapper.Map(professor, user);
         _repository.Save();

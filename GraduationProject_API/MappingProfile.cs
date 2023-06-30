@@ -108,5 +108,15 @@ public class MappingProfile : Profile
             opts => opts.MapFrom(x => x.Subject.Name))
             .ForCtorParam("Content",
             opts => opts.MapFrom(x => x.Content.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)));
+
+        // University Admin
+        CreateMap<UniversityAdmin, UniversityAdminDto>();
+
+        // Faculty Admin
+        CreateMap<FacultyAdmin, FacultyAdminDto>();
+
+        // Department Admin
+        CreateMap<DepartmentAdmin, DepartmentAdminDto>();
+
     }
 }

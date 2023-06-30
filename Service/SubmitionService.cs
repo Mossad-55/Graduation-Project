@@ -28,7 +28,7 @@ internal sealed class SubmitionService : ISubmitionService
 
         var student = _repository.Student.CheckForStudentById(studentId, trackChanges);
         if (!student)
-            throw new UserNotFoundException(studentId);
+            throw new UserNotFoundException(studentId.ToString());
 
         var submitionEntity = _mapper.Map<Submition>(submition);
 
@@ -44,7 +44,7 @@ internal sealed class SubmitionService : ISubmitionService
 
         var student = _repository.Student.CheckForStudentById(studentId, trackChanges);
         if (!student)
-            throw new UserNotFoundException(studentId);
+            throw new UserNotFoundException(studentId.ToString());
 
         return _repository.Submition.CheckForStudentSubmition(questionnaireId, studentId, trackChanges);
     }

@@ -25,4 +25,8 @@ internal sealed class FacultyAdminRepository : RepositoryBase<FacultyAdmin>, IFa
     public FacultyAdmin GetFacultyAdmin(Guid facultyId, Guid id, bool trackChanges) =>
         FindByCondition(a => a.FacultyId == facultyId && a.Id == id, trackChanges)
         .FirstOrDefault();
+
+    public FacultyAdmin GetFacultyAdminById(Guid id, bool trackChanges) =>
+        FindByCondition(a => a.Id == id, trackChanges)
+        .FirstOrDefault();
 }
