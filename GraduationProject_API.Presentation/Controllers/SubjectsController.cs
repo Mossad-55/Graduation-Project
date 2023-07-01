@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -13,6 +14,7 @@ public class SubjectsController : ControllerBase
 	public SubjectsController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin")]
     public IActionResult GetSubjectsForDepartment(Guid facultyId, Guid departmentId)
     {
         var subjects = _service.SubjectService.GetAllSubjects(facultyId, departmentId ,false);
@@ -21,6 +23,7 @@ public class SubjectsController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetSubjectForDepartment")]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin, Professor")]
     public IActionResult GetSubject(Guid facultyId, Guid departmentId, Guid id)
     {
         var subject = _service.SubjectService.GetSubject(facultyId, departmentId, id, false);
@@ -29,6 +32,7 @@ public class SubjectsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult CreateSubject(Guid facultyId, Guid departmentId, [FromBody] SubjectForCreationDto subject)
     {
         if (subject is null)
@@ -40,6 +44,7 @@ public class SubjectsController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult DeleteSubject(Guid facultyId, Guid departmentId, Guid id)
     {
         _service.SubjectService.DeleteSubjectForDepartment(facultyId, departmentId, id, false);
@@ -48,6 +53,7 @@ public class SubjectsController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult UpdateSubject(Guid facultyId, Guid departmentId, Guid id,
         [FromBody] SubjectForUpdateDto subject)
     {

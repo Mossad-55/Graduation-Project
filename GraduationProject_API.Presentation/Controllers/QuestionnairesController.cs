@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -13,6 +14,7 @@ public class QuestionnairesController : ControllerBase
     public QuestionnairesController(IServiceManager service) => _service = service;
 
     [HttpGet("questionnaires/{id:Guid}")]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin, Professor")]
     public IActionResult GetQuestionnaireById(Guid id)
     {
         var questionnaire = _service.QuestionnaireService.GetQuestionnaireById(id, false);
@@ -21,6 +23,7 @@ public class QuestionnairesController : ControllerBase
     }
 
     [HttpGet("departments/{departmentId}/subjects/{subjectId}/questionnaires")]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin, Professor")]
     public IActionResult GetQuestionnairesForSubject(Guid departmentId, Guid subjectId)
     {
         var questionnaires = _service.QuestionnaireService.GetAllQuestionnaires(departmentId, subjectId, false);
@@ -29,6 +32,7 @@ public class QuestionnairesController : ControllerBase
     }
 
     [HttpGet("/departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}", Name = "GetQuestionnaireForSubject")]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin, Professor")]
     public IActionResult GetQuestionnaire(Guid departmentId, Guid subjectId, Guid id)
     {
         var questionnaire = _service.QuestionnaireService.GetQuestionnaire(departmentId, subjectId, id, false);
@@ -37,6 +41,7 @@ public class QuestionnairesController : ControllerBase
     }
 
     [HttpPost("departments/{departmentId}/subjects/{subjectId}/questionnaires")]
+    [Authorize(Roles = "Department Admin")]
     public IActionResult CreateQuestionnaire(Guid departmentId, Guid subjectId, [FromBody] QuestionnaireForCreationDto questionnaire)
     {
         if (questionnaire is null)
@@ -48,6 +53,7 @@ public class QuestionnairesController : ControllerBase
     }
 
     [HttpDelete("departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}")]
+    [Authorize(Roles = "Department Admin")]
     public IActionResult DeleteQuestionnaire(Guid departmentId, Guid subjectId, Guid id)
     {
         _service.QuestionnaireService.DeleteQuestionnaireForSubject(departmentId, subjectId, id, false);
@@ -56,6 +62,7 @@ public class QuestionnairesController : ControllerBase
     }
 
     [HttpPut("departments/{departmentId}/subjects/{subjectId}/questionnaires/{id:Guid}")]
+    [Authorize(Roles = "Department Admin")]
     public IActionResult UpdateQuestionnaire(Guid departmentId, Guid subjectId, Guid id, 
         [FromBody]QuestionnaireForUpdateDto questionnaire)
     {

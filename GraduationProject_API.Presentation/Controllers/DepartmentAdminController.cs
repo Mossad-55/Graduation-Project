@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -13,6 +14,7 @@ public class DepartmentAdminController : ControllerBase
     public DepartmentAdminController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "Faculty Admin")]
     public async Task<IActionResult> GetAllAdmins(Guid departmentId)
     {
         var admins = await _service.DepartmentAdminService.GetAllAdmins(departmentId, false);
@@ -21,6 +23,7 @@ public class DepartmentAdminController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetDepartmentAdmin")]
+    [Authorize(Roles = "Faculty Admin, Department Admin")]
     public async Task<IActionResult> GetAdmin(Guid departmentId, Guid id)
     {
         var admin = await _service.DepartmentAdminService.GetDepartmentAdmin(departmentId, id, false);
@@ -29,6 +32,7 @@ public class DepartmentAdminController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "Faculty Admin")]
     public async Task<IActionResult> UpdateAdminDetails(Guid departmentId, Guid id,
         [FromBody] UserForUpdateDto admin)
     {
@@ -40,6 +44,7 @@ public class DepartmentAdminController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Faculty Admin")]
     public async Task<IActionResult> CreateAdmin(Guid departmentId, [FromBody] UserForCreationDto admin)
     {
         if (admin is null)

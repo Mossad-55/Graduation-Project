@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 
 namespace GraduationProject_API.Presentation.Controllers;
@@ -12,6 +13,7 @@ public class RecommendationController : ControllerBase
     public RecommendationController(IServiceManager service) => _service = service;
 
     [HttpGet("professors/{professorId}/recommendations")]
+    [Authorize(Roles = "Professor")]
     public IActionResult GetRecommendationsForProfessor(Guid professorId)
     {
         var recommendations = _service.Recommendation.GetRecommendationsForProfessor(professorId, false);

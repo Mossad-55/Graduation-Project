@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -13,6 +14,7 @@ public class FaculitiesController : ControllerBase
     public FaculitiesController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "University Admin")]
     public IActionResult GetFaculitiesForUniversity(Guid universityId)
     {
         var faculities = _service.FacultyService.GetAllFaculities(universityId, trackChanges: false);
@@ -21,6 +23,7 @@ public class FaculitiesController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetFacultyForUniversity")]
+    [Authorize(Roles = "University Admin, Faculty Admin")]
     public IActionResult GetFaculty(Guid universityId, Guid id)
     {
         var faculty = _service.FacultyService.GetFaculty(universityId, id, trackChanges: false);
@@ -29,6 +32,7 @@ public class FaculitiesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "University Admin")]
     public IActionResult CreateFaculty(Guid universityId, [FromBody] FacultyForCreationDto faculty)
     {
         if (faculty is null)
@@ -40,6 +44,7 @@ public class FaculitiesController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
+    [Authorize(Roles = "University Admin")]
     public IActionResult DeleteFacultyForUniversity(Guid universityId, Guid id)
     {
         _service.FacultyService.DeleteFacultyForUniversity(universityId, id, trackChanges: false);
@@ -48,6 +53,7 @@ public class FaculitiesController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "University Admin")]
     public IActionResult UpdateFacultyForUniversity(Guid universityId, Guid id,
         [FromBody] FacultyForUpdateDto faculty)
     {

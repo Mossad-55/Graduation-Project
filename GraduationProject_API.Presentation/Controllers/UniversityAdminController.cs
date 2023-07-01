@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
+using System.Data;
 
 namespace GraduationProject_API.Presentation.Controllers;
 
@@ -12,6 +14,7 @@ public class UniversityAdminController : ControllerBase
     public UniversityAdminController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> GetAllAdmins(Guid universityId)
     {
         var admins = await _service.UniversityAdminService.GetAllAdmins(universityId, false);
@@ -20,6 +23,7 @@ public class UniversityAdminController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetUniversityAdmin")]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> GetAdmin(Guid universityId, Guid id)
     {
         var admin = await _service.UniversityAdminService.GetUniveristyAdmin(universityId, id, false);
@@ -28,6 +32,7 @@ public class UniversityAdminController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> UpdateAdminDetails(Guid universityId, Guid id, 
         [FromBody] UserForUpdateDto admin)
     {
@@ -39,6 +44,7 @@ public class UniversityAdminController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> CreateAdmin(Guid universityId, [FromBody] UserForCreationDto admin)
     {
         if (admin is null)

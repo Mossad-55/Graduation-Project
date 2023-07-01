@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
+using Shared.Utilities;
 
 namespace GraduationProject_API.Presentation.Controllers;
 
 [Route("api/universities")]
 [ApiController]
+[Authorize(Roles = "University Admin")]
 public class UniversitiesController : ControllerBase
 {
     private readonly IServiceManager _service;

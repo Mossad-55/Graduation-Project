@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
-using System.ComponentModel.DataAnnotations;
 
 namespace GraduationProject_API.Presentation.Controllers;
 
@@ -14,6 +14,7 @@ public class StudentsController : ControllerBase
     public StudentsController(IServiceManager service) => _service = service;
 
     [HttpGet("{id:Guid}")]
+    [Authorize(Roles = "Student")]
     public async Task<IActionResult> GetStudentWithSubject(Guid id)
     {
         var student = await _service.StudentService.GetStudentWithSubjects(id, false);
@@ -22,6 +23,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpGet("{id:Guid}/subjects")]
+    [Authorize(Roles = "Student")]
     public async Task<IActionResult> GetStudentSubjectsAndQestionnaire(Guid id)
     {
         var subjects = await _service.StudentService.GetStudentSubjectsWithQuestionnaires(id, false);
@@ -30,6 +32,7 @@ public class StudentsController : ControllerBase
     }
 
     [HttpPost("{id:Guid}/questionnaire/{questionnaireId}/submit")]
+    [Authorize(Roles = "Student")]
     public IActionResult SubmitionForQuestionnaire(Guid id, Guid questionnaireId, [FromBody] SubmitionForCreationDto submition)
     {
         _service.SubmitionService.AddSubmition(questionnaireId, id, submition, false);

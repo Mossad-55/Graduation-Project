@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
+using System.Data;
 
 namespace GraduationProject_API.Presentation.Controllers;
 
@@ -13,6 +15,7 @@ public class DepartmentsController : ControllerBase
     public DepartmentsController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "University Admin, Faculty Admin")]
     public IActionResult GetDepartmentsForFaculty(Guid universityId, Guid facultyId)
     {
         var departments = _service.DepartmentService.GetAllDepartments(universityId, facultyId, false);
@@ -21,6 +24,7 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpGet("low-rate")]
+    [Authorize(Roles = "Faculty Admin, Department Admin")]
     public IActionResult GetDepartmentsWithLowRate(Guid universityId, Guid facultyId)
     {
         var departmentsWithSubjects = _service.DepartmentService.GetAllDepartmentsWithSubjects(universityId, facultyId, false);
@@ -29,6 +33,7 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetDepartmentForFaculty")]
+    [Authorize(Roles = "University Admin, Faculty Admin, Department Admin")]
     public IActionResult GetDepartment(Guid universityId, Guid facultyId, Guid id)
     {
         var department = _service.DepartmentService.GetDepartment(universityId, facultyId, id, false);
@@ -37,6 +42,7 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult CreateDepartment(Guid universityId, Guid facultyId, [FromBody]DepartmentForCreateDto department)
     {
         if (department is null)
@@ -48,6 +54,7 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult DeleteDepartment(Guid universityId, Guid facultyId, Guid id)
     {
         _service.DepartmentService.DeleteDepartmentForFaculty(universityId, facultyId, id, false);
@@ -56,6 +63,7 @@ public class DepartmentsController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "Faculty Admin")]
     public IActionResult UpdateDepartment(Guid universityId, Guid facultyId, Guid id,
         [FromBody] DepartmentForUpdateDto department)
     {

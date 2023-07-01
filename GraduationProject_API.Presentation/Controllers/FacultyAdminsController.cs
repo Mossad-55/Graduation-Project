@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTranferObjects;
 
@@ -13,6 +14,7 @@ public class FacultyAdminsController : ControllerBase
     public FacultyAdminsController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> GetAllAdmins(Guid facultyId)
     {
         var admins = await _service.FacultyAdminService.GetAllAdmins(facultyId, false);
@@ -21,6 +23,7 @@ public class FacultyAdminsController : ControllerBase
     }
 
     [HttpGet("{id:Guid}", Name = "GetFacultyAdmin")]
+    [Authorize(Roles = "University Admin, Faculty Admin")]
     public async Task<IActionResult> GetAdmin(Guid facultyId, Guid id)
     {
         var admin = await _service.FacultyAdminService.GetFacultyAdmin(facultyId, id, false);
@@ -29,6 +32,7 @@ public class FacultyAdminsController : ControllerBase
     }
 
     [HttpPut("{id:Guid}")]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> UpdateAdminDetails(Guid facultyId, Guid id,
         [FromBody] UserForUpdateDto admin)
     {
@@ -40,6 +44,7 @@ public class FacultyAdminsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> CreateAdmin(Guid facultyId, [FromBody] UserForCreationDto admin)
     {
         if (admin is null)
@@ -50,6 +55,7 @@ public class FacultyAdminsController : ControllerBase
     }
 
     [HttpDelete("{id:Guid}")]
+    [Authorize(Roles = "University Admin")]
     public async Task<IActionResult> DeleteAdmin(Guid facultyId, Guid id)
     {
         await _service.FacultyAdminService.DeleteAdminForFaculty(facultyId, id, false);

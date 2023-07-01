@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 
 namespace GraduationProject_API.Presentation.Controllers;
@@ -12,6 +13,7 @@ public class SubmitionController : ControllerBase
 	public SubmitionController(IServiceManager service) => _service = service;
 
     [HttpGet("questionnaires/{questionnaireId}/students/{studentId}/check")]
+    [Authorize(Roles = "Student")]
     public IActionResult CheckStudentSubmition(Guid questionnaireId, Guid studentId)
     {
         var result = _service.SubmitionService.CheckStudentSubmition(questionnaireId, studentId, false);
