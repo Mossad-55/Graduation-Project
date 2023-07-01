@@ -13,7 +13,7 @@ public class AuthController : ControllerBase
 
 	public AuthController(IAuthService authService) => _authService = authService;
 
-    [HttpPost("admin-login")]
+    [HttpPost("admins-login")]
     public async Task<IActionResult> LoginAdminAsync([FromBody] LoginDto model)
     {
         if (model is null)
@@ -43,6 +43,32 @@ public class AuthController : ControllerBase
                 role = result.Role,
                 token = result.Token
             });
+
+        return Ok(result);
+    }
+
+    [HttpPost("professors-login")]
+    public async Task<IActionResult> LoginProfessorAsync([FromBody] LoginDto model)
+    {
+        if (model is null)
+            return BadRequest(new { message = "Object can't be null." });
+
+        var result = await _authService.LoginProfessorAsync(model, false);
+        if (!result.IsAuthenticated)
+            return BadRequest(new { message = "Access Denied." });
+
+        return Ok(result);
+    }
+
+    [HttpPost("students-login")]
+    public async Task<IActionResult> LoginStudentAsync([FromBody] LoginDto model)
+    {
+        if (model is null)
+            return BadRequest(new { message = "Object can't be null." });
+
+        var result = await _authService.LoginStudentAsync(model, false);
+        if (!result.IsAuthenticated)
+            return BadRequest(new { message = "Access Denied." });
 
         return Ok(result);
     }

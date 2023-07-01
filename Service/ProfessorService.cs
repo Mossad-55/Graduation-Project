@@ -83,6 +83,17 @@ internal sealed class ProfessorService : IProfessorService
         return professorsDto;
     }
 
+    public ProfessorDetailsDto GetProfessorById(Guid id, bool trackChanges)
+    {
+        var professor = _repository.Professor.GetAProfessor(id, trackChanges);
+        if (professor is null)
+            throw new UserNotFoundException(id.ToString());
+
+        var professorDto = _mapper.Map<ProfessorDetailsDto>(professor);
+
+        return professorDto;
+    }
+
     public async Task<ProfessorDto> GetProfessorWithSubjects(Guid id, bool trackChanges)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());

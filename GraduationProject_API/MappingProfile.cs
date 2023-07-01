@@ -65,14 +65,17 @@ public class MappingProfile : Profile
             .ForMember(u => u.UserName,
             opts => opts.MapFrom(x => x.Email));
         CreateMap<UserDto, UniversityAdmin>();
+        CreateMap<UniversityAdmin, UniversityAdminDto>();
 
         // Faculty Admin Mapping
         CreateMap<User, FacultyAdmin>();
         CreateMap<UserDto, FacultyAdmin>();
+        CreateMap<FacultyAdmin, FacultyAdminDto>();
 
         // Department Admin Mapping
         CreateMap<User, DepartmentAdmin>();
         CreateMap<UserDto, DepartmentAdmin>();
+        CreateMap<DepartmentAdmin, DepartmentAdminDto>();
 
         // Professor Mapping
         CreateMap<UserDto, Professor>();
@@ -80,12 +83,14 @@ public class MappingProfile : Profile
             .ForMember(p => p.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
         CreateMap<ProfessorDto, Professor>();
+        CreateMap<Professor, ProfessorDetailsDto>();
 
         // Student Mapping
         CreateMap<User, StudentDto>()
             .ForMember(s => s.FullName,
             opts => opts.MapFrom(x => string.Join(' ', x.FirstName, x.LastName)));
         CreateMap<Student, StudentDto>();
+        CreateMap<Student, StudentDetailsDto>();
 
         // Submition Mapping
         CreateMap<Submition, SubmitionDto>();
@@ -108,15 +113,6 @@ public class MappingProfile : Profile
             opts => opts.MapFrom(x => x.Subject.Name))
             .ForCtorParam("Content",
             opts => opts.MapFrom(x => x.Content.Split(new[] { '*' }, StringSplitOptions.RemoveEmptyEntries)));
-
-        // University Admin
-        CreateMap<UniversityAdmin, UniversityAdminDto>();
-
-        // Faculty Admin
-        CreateMap<FacultyAdmin, FacultyAdminDto>();
-
-        // Department Admin
-        CreateMap<DepartmentAdmin, DepartmentAdminDto>();
-
+        
     }
 }

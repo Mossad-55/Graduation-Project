@@ -22,6 +22,17 @@ internal sealed class StudentService : IStudentService
         _userManager = userManager;
     }
 
+    public StudentDetailsDto GetStudentById(Guid id, bool trackChanges)
+    {
+        var student = _repository.Student.GetStudentById(id, trackChanges);
+        if (student is null)
+            throw new UserNotFoundException(id.ToString());
+
+        var studentDto = _mapper.Map<StudentDetailsDto>(student);
+
+        return studentDto;
+    }
+
     public async Task<ICollection<SubjectDtoForStudent>> GetStudentSubjectsWithQuestionnaires(Guid id, bool trackChanges)
     {
         var user = await _userManager.FindByIdAsync(id.ToString());

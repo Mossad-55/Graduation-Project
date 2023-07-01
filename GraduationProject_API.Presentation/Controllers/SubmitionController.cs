@@ -15,7 +15,7 @@ public class SubmitionController : ControllerBase
     public IActionResult CheckStudentSubmition(Guid questionnaireId, Guid studentId)
     {
         var result = _service.SubmitionService.CheckStudentSubmition(questionnaireId, studentId, false);
-        if (!result)
+        if (result)
             return Ok(new {message = "Please answer the following questions."});
 
         return BadRequest(new {message = "You had already submitted the questionnaire."});

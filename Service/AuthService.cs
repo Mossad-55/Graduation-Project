@@ -51,14 +51,16 @@ public sealed class AuthService : IAuthService
         var jwtSecurityToken = await CreateJwtToken(user);
 
         // Initialize UserDetailsDto
-        var userDetails = new UserDetailsDto();
-        userDetails.UserId = user.Id;
-        userDetails.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
-        userDetails.Role = userRole[0];
-        userDetails.Email = user.Email;
-        userDetails.IsAuthenticated = true;
+        var userDetails = new UserDetailsDto
+        {
+            UserId = user.Id,
+            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            Role = userRole[0],
+            Email = user.Email,
+            IsAuthenticated = true
+        };
 
-        Guid userId = new Guid(user.Id);
+        var userId = new Guid(user.Id);
         if (userRole[0] == StaticData.UniversityAdminRole)
         {
             var uniAdminDto = _service.UniversityAdminService.GetUniveristyAdminById(userId, trackChanges);
@@ -80,14 +82,80 @@ public sealed class AuthService : IAuthService
         return userDetails;
     }
 
-    public Task<UserDetailsDto> LoginProfessorAsync(LoginDto model)
+    public async Task<UserDetailsDto> LoginProfessorAsync(LoginDto model, bool trackChanges)
     {
-        throw new NotImplementedException();
+        // Getting the user.
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user is null)
+            throw new UserNotFoundException(model.Email);
+
+        // Checking for Email and Password.
+        if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            throw new WrongEmailOrPasswordException();
+
+        // Check for Admin Role.
+        var userRole = await _userManager.GetRolesAsync(user);
+        if (userRole[0] != StaticData.ProfessorRole)
+            throw new AccessDeniedException();
+
+        // Creating a JWT token 
+        var jwtSecurityToken = await CreateJwtToken(user);
+
+        var userId = new Guid(user.Id);
+        var professor = _service.ProfessorService.GetProfessorById(userId, trackChanges);
+        
+        // Initialize UserDetailsDto
+        var userDetails = new UserDetailsDto
+        {
+            UserId = user.Id,
+            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            Role = userRole[0],
+            Email = user.Email,
+            IsAuthenticated = true,
+            UniversityId = professor.UniveristyId,
+            FacultyId = professor.FacultyId,
+            DepartmentId = professor.DepartmentId
+        };
+
+        return userDetails;
     }
 
-    public Task<UserDetailsDto> LoginStudentAsync(LoginDto model)
+    public async Task<UserDetailsDto> LoginStudentAsync(LoginDto model, bool trackChanges)
     {
-        throw new NotImplementedException();
+        // Getting the user.
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user is null)
+            throw new UserNotFoundException(model.Email);
+
+        // Checking for Email and Password.
+        if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            throw new WrongEmailOrPasswordException();
+
+        // Check for Admin Role.
+        var userRole = await _userManager.GetRolesAsync(user);
+        if (userRole[0] != StaticData.StudentRole)
+            throw new AccessDeniedException();
+
+        // Creating a JWT token 
+        var jwtSecurityToken = await CreateJwtToken(user);
+
+        var userId = new Guid(user.Id);
+        var student = _service.StudentService.GetStudentById(userId, trackChanges);
+
+        // Initialize UserDetailsDto
+        var userDetails = new UserDetailsDto
+        {
+            UserId = user.Id,
+            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+            Role = userRole[0],
+            Email = user.Email,
+            IsAuthenticated = true,
+            UniversityId = student.UniveristyId,
+            FacultyId = student.FacultyId,
+            DepartmentId = student.DepartmentId
+        };
+
+        return userDetails;
     }
 
     // Private Functions.
